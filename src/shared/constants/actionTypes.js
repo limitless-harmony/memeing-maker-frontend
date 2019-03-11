@@ -1,0 +1,2 @@
+export const WELCOME_ACTION = 'WELCOME_ACTION';
+export const CURRENT_TIME = 'CURRENT_TIME';
