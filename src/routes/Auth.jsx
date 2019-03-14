@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
+
 import CreateRoute from 'pages/CreateMeme';
-// import { bindActionCreators } from 'redux';
 
 const AuthRoutes = () => {
   return (
@@ -12,9 +12,5 @@ const AuthRoutes = () => {
     </React.Fragment>
   );
 };
-
-// Routes.propTypes = {
-//   showModal: PropTypes.bool.isRequired,
-// };
 
 export default AuthRoutes;

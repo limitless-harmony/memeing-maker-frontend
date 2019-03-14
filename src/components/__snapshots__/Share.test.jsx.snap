@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing the Share component renders without crashing 1`] = `
+<styled.div>
+  <styled.div>
+    <Connect(ShareButton)
+      network="facebook"
+    >
+      <Icon
+        logoFillColor="white"
+        round={true}
+        size={40}
+      />
+    </Connect(ShareButton)>
+    <Connect(ShareButton)
+      network="twitter"
+    >
+      <Icon
+        logoFillColor="white"
+        round={true}
+        size={40}
+      />
+    </Connect(ShareButton)>
+    <Connect(ShareButton)
+      network="whatsapp"
+    >
+      <Icon
+        logoFillColor="white"
+        round={true}
+        size={40}
+      />
+    </Connect(ShareButton)>
+    <Connect(ShareButton)
+      network="linkedin"
+    >
+      <Icon
+        logoFillColor="white"
+        round={true}
+        size={40}
+      />
+    </Connect(ShareButton)>
+  </styled.div>
+</styled.div>
+`;
