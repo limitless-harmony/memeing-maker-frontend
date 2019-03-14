@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing the Masonry component renders without crashing 1`] = `
+<styled.div>
+  <div>
+    Anything can be here
+  </div>
+  <div>
+    Anything can be here
+  </div>
+</styled.div>
+`;

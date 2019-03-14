@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing the MemeCard component renders without crashing 1`] = `
+<styled.div>
+  <Styled(styled.div)>
+    A top text
+  </Styled(styled.div)>
+  <styled.div>
+    <img
+      alt=""
+      height="100%"
+      src="www.me.memememem"
+      width="100%"
+    />
+  </styled.div>
+  <Styled(styled.div)>
+    A bottom text
+  </Styled(styled.div)>
+</styled.div>
+`;

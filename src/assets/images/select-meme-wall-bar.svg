@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="222px" height="30px" viewBox="0 0 222 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.6 (67491) - http://www.bohemiancoding.com/sketch -->
+    <title>Bars / Select Meme Wall Bar</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Bars-/-Select-Meme-Wall-Bar" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group">
+            <rect id="Rectangle" fill="#F4F4F4" x="0" y="0" width="222" height="30" rx="10"></rect>
+            <text id="Memeing-Maker" font-family="LucidaGrande, Lucida Grande" font-size="15" font-weight="normal" fill="#4A4A4A">
+                <tspan x="17" y="21">Memeing Maker</tspan>
+            </text>
+        </g>
+    </g>
+</svg>

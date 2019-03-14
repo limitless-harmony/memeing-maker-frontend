@@ -1,13 +1,16 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import Home from '../pages/home/Home';
-import GlobalStyles from '../styles/globals';
+
+import Featured from 'pages/Featured';
+import GlobalStyles from 'styles/globals';
+import Navbar from 'components/Header';
 
 const routes = (
   <React.Fragment>
     <GlobalStyles />
+    <Navbar />
     <Switch>
-      <Route exact path="/" component={Home} />
+      <Route exact path="/" component={Featured} />
     </Switch>
   </React.Fragment>
 );

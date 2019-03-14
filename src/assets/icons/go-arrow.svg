@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="24px" viewBox="0 0 16 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.6 (67491) - http://www.bohemiancoding.com/sketch -->
+    <title>Icons / Go Arrow</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Icons-/-Go-Arrow" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M3.28282315,0.464619326 C2.43397267,-0.243726896 1.17205908,-0.129293493 0.46426027,0.720213485 C-0.243538545,1.56972046 -0.129193575,2.83261 0.719656907,3.54095623 L10.8763232,12.0107902 L0.719656907,20.4802239 C-0.10765921,21.1938503 -0.210411204,22.439537 0.488773871,23.2792736 C1.18795895,24.1190101 2.43079727,24.2425919 3.28142317,23.5569611 L15.2812651,13.549359 C15.7367565,13.1684646 16,12.6050223 16,12.0109904 C16,11.4169584 15.7367565,10.8535162 15.2812651,10.4726218 L3.28282315,0.464619326 Z" id="Go-Arrow" fill="#4A4A4A"></path>
+    </g>
+</svg>

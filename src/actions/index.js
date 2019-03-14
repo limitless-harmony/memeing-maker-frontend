@@ -1,4 +1,4 @@
-import { WELCOME_ACTION, CURRENT_TIME } from '../shared/constants/actionTypes';
+import { WELCOME_ACTION, CURRENT_TIME } from 'shared/constants/actionTypes';
 
 export const welcome = () => {
   return {

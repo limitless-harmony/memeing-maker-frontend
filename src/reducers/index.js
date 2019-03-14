@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import { connectRouter } from 'connected-react-router';
-import sampleReducer from './sample';
+
+import sampleReducer from 'reducers/sample';
 
 const rootReducer = history =>
   combineReducers({
