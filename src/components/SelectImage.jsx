@@ -6,11 +6,12 @@ import { connect } from 'react-redux';
 import { hideModal } from 'actions/modal';
 import { selectImage } from 'actions/image';
 import { calculateRem } from 'styles';
+import Input from 'components/Input';
+import { GoArrow } from 'components/Icons';
 import CropImage from 'components/CropImage';
 import Button from 'components/Button';
-import ImageIcon from 'components/ImageIcon';
-import folder from 'assets/icons/folder.png';
 import camera from 'assets/icons/camera.png';
+import folder from 'assets/icons/folder.png';
 import gallery from 'assets/icons/gallery.png';
 import { getCroppedImage, readFile } from 'helpers/image';
 
@@ -66,10 +67,23 @@ export class SelectImage extends Component {
     const { imageUrl, crop, zoom, aspect } = this.state;
     return (
       <StyledSelectImage>
+        <InputSection>
+          <Input
+            value={imageUrl}
+            name="imageUrl"
+            filled
+            textAlign="left"
+            onChange={this.changeText}
+            placeholder="Insert image url"
+          />
+          <ArrowSection>
+            <GoArrow />
+          </ArrowSection>
+        </InputSection>
         <IconSection>
-          <ImageIcon width={50} src={camera} />
+          <Icon src={camera} />
           <Label htmlFor="image">
-            <ImageIcon width={50} src={folder} />
+            <Icon src={folder} />
             <input
               id="image"
               type="file"
@@ -77,7 +91,7 @@ export class SelectImage extends Component {
               onChange={this.onFileChange}
             />
           </Label>
-          <ImageIcon src={gallery} />
+          <Icon src={gallery} />
         </IconSection>
         <CropSection>
           {imageUrl && (
@@ -87,7 +101,6 @@ export class SelectImage extends Component {
                 crop={crop}
                 zoom={zoom}
                 aspect={aspect}
-                style={{ height: '100%' }}
                 onCropChange={this.onCropChange}
                 onCropComplete={this.onCropComplete}
                 onZoomChange={this.onZoomChange}
@@ -109,25 +122,40 @@ const StyledSelectImage = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  height: 50%;
   box-sizing: border-box;
   text-align: center;
+`;
+
+const InputSection = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: ${calculateRem(14)};
+  box-sizing: border-box;
+  font-size: ${calculateRem(18)};
+`;
+
+const ArrowSection = styled.div`
+  margin: auto ${calculateRem(18)};
 `;
 
 const IconSection = styled.div`
   display: flex;
   width: 100%;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
-  padding: ${calculateRem(20)} ${calculateRem(40)};
-  min-height: ${calculateRem(80)};
+  padding: ${calculateRem(18)} ${calculateRem(40)};
   box-sizing: border-box;
 `;
 const CropSection = styled.div`
   width: 100%;
+  height: 400px;
 `;
 
+const Icon = styled.img``;
+
 const Label = styled.label`
-  height: 100%;
   input {
     display: none;
   }
