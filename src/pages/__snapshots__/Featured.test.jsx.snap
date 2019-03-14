@@ -50,6 +50,7 @@ exports[`Testing the Featured page component renders without crashing 1`] = `
   </Masonry>
   <Button
     color="#979797"
+    fullWidth={false}
     outline={true}
     rounded={true}
   >
