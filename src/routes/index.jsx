@@ -1,39 +1,37 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-// import { bindActionCreators } from 'redux';
 
 import Featured from 'pages/Featured';
 import GlobalStyles from 'styles/globals';
+import AuthRoutes from 'routes/Auth';
 import Navbar from 'components/Header';
-import Authentication from '../components/Authentication';
-import Modal from '../components/Modal';
+import Authentication from 'components/Authentication';
+import RootModal from 'components/Modal';
+import SelectImageModal from 'components/SelectImage';
 
-const Routes = ({ showModal }) => {
+const Routes = ({ showModal, modalId }) => {
   return (
     <React.Fragment>
       <GlobalStyles />
       <Navbar />
       <Switch>
         <Route exact path="/" component={Featured} />
+        <Route component={AuthRoutes} />
       </Switch>
       {showModal && (
-        <Modal>
-          <Authentication />
-        </Modal>
+        <RootModal>
+          {modalId === 'auth' && <Authentication />}
+          {modalId === 'select-image' && <SelectImageModal />}
+        </RootModal>
       )}
     </React.Fragment>
   );
 };
 
-Routes.propTypes = {
-  showModal: PropTypes.bool.isRequired,
-};
-
 const mapStateToProps = state => ({
   showModal: state.modal.show,
-  router: state.router,
+  modalId: state.modal.id,
 });
 
 export default connect(mapStateToProps)(Routes);

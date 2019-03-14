@@ -17,7 +17,7 @@ export class Header extends Component {
   share = () => {
     const { isLoggedIn, actions } = this.props;
     if (!isLoggedIn) {
-      return actions.showModal();
+      return actions.showModal('auth');
     }
     // TODO: Share the meme/view
     return true;
@@ -59,8 +59,10 @@ export const StyledHeader = styled.header`
   padding: 0 ${calculateRem(14)};
   background: ${white};
   position: fixed;
+  z-index: 10;
   width: 100%;
-  max-width: ${mobileWidth};
+  max-width: ${calculateRem(mobileWidth)};
+  box-sizing: border-box;
   left: 50%;
   top: 0%;
   transform: translateX(-50%);

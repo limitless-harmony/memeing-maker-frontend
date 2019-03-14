@@ -6,12 +6,15 @@
     "axios": "^0.18.0",
     "color": "^3.1.0",
     "connected-react-router": "^6.3.2",
+    "dom-to-image": "^2.6.0",
     "enzyme-adapter-react-16": "^1.11.2",
     "enzyme-to-json": "^3.3.5",
+    "file-saver": "^2.0.1",
     "history": "^4.7.2",
     "prop-types": "^15.7.2",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
+    "react-easy-crop": "^1.9.1",
     "react-helmet": "^5.2.0",
     "react-hot-loader": "^4.8.0",
     "react-redux": "^6.0.1",
@@ -56,7 +59,8 @@
       "src/**/**/*.jsx",
       "src/**/**/*.js",
       "!src/serviceWorker.js",
-      "!src/index.jsx"
+      "!src/index.jsx",
+      "!src/helpers/*.js"
     ],
     "coverageReporters": [
       "cobertura",

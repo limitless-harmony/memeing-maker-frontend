@@ -14,17 +14,15 @@ const globalStyles = createGlobalStyle`
 
   body {
     background-color: ${white};
-    margin: auto;
-    padding: ${calculateRem(70)} 0 0;
+    margin: 0 auto;
+    padding: ${calculateRem(36)} 0 0;
     color: ${black};
     font-size: ${baseSize}px;
     font-family: 'Lucida grande';
     min-height: 100%;
     position:relative;
   }
-  * {
-    box-sizing: border-box;
-  }
+  
   #root {
     display: flex;
     min-height: 100%;

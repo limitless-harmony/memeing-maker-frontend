@@ -1,17 +1,24 @@
 import React from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 
 import { calculateRem } from 'styles';
-import { white, darken, green } from 'styles/colors';
+import { white, black, darken } from 'styles/colors';
 
-const Button = ({ color, children, rounded, outline, fullWidth }) => {
+const Button = ({
+  color = black,
+  children,
+  rounded,
+  outline,
+  fullWidth,
+  onClick,
+}) => {
   return (
     <StyledButton
       color={color}
       outline={outline}
       rounded={rounded}
       fullWidth={fullWidth}
+      onClick={onClick}
     >
       {children}
     </StyledButton>
@@ -37,21 +44,5 @@ export const StyledButton = styled.button`
     color: ${white};
   }
 `;
-
-Button.propTypes = {
-  color: PropTypes.string,
-  outline: PropTypes.bool,
-  rounded: PropTypes.bool,
-  fullWidth: PropTypes.bool,
-  children: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-};
-
-Button.defaultProps = {
-  color: green,
-  outline: false,
-  rounded: false,
-  fullWidth: false,
-  children: 'Submit',
-};
 
 export default Button;

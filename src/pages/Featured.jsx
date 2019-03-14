@@ -65,7 +65,7 @@ class Featured extends Component {
 }
 
 const StyledFeatured = styled.div`
-  margin: ${calculateRem(10)} auto ${calculateRem(40)};
+  margin: ${calculateRem(40)} auto;
   display: flex;
   flex-direction: column;
   justify-content: center;

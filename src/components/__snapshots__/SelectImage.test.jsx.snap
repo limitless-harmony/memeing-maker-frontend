@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing the SelectImage page component renders without crashing 1`] = `
+<styled.div>
+  <styled.div>
+    <Input
+      filled={true}
+      name="imageUrl"
+      onChange={[Function]}
+      placeholder="Insert image url"
+      textAlign="left"
+      value=""
+    />
+    <styled.div>
+      <ForwardRef />
+    </styled.div>
+  </styled.div>
+  <styled.div>
+    <styled.img
+      src="camera.png"
+    />
+    <styled.label
+      htmlFor="image"
+    >
+      <styled.img
+        src="folder.png"
+      />
+      <input
+        accept="image/*"
+        id="image"
+        onChange={[Function]}
+        type="file"
+      />
+    </styled.label>
+    <styled.img
+      src="gallery.png"
+    />
+  </styled.div>
+  <styled.div />
+</styled.div>
+`;

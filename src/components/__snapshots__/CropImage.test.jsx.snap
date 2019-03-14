@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing the CropImage component matches snapshot 1`] = `
+<styled.div>
+  <Cropper
+    aspect={1.3333333333333333}
+    classes={Object {}}
+    cropShape="rect"
+    maxZoom={3}
+    minZoom={1}
+    showGrid={true}
+    style={Object {}}
+    zoom={1}
+    zoomSpeed={1}
+  />
+</styled.div>
+`;
