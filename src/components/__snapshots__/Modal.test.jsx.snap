@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing the Modal component renders without crashing 1`] = `
+<Portal
+  containerInfo={<body />}
+>
+  <styled.div>
+    <styled.div>
+      <styled.span
+        onClick={[Function]}
+      >
+        ×
+      </styled.span>
+    </styled.div>
+    Sample Modal
+  </styled.div>
+</Portal>
+`;

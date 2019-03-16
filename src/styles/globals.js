@@ -14,10 +14,12 @@ const globalStyles = createGlobalStyle`
 
   body {
     background-color: ${white};
-    margin: ${calculateRem(70)} auto;
+    margin: auto;
+    padding: ${calculateRem(70)} 0 0;
     color: ${black};
     font-size: ${baseSize}px;
     font-family: 'Lucida grande';
+    min-height: 100%;
     position:relative;
   }
   * {
@@ -26,14 +28,6 @@ const globalStyles = createGlobalStyle`
   #root {
     display: flex;
     min-height: 100%;
-  }
-  
-  h2 {
-    font-size: ${calculateRem(50)};
-  }
-  p {
-    font-size: ${calculateRem(18)};
-    line-height: 1.5;
   }
 `;
 

@@ -3,13 +3,15 @@ import PropTypes from 'prop-types';
 import { ConnectedRouter } from 'connected-react-router';
 import styled from 'styled-components';
 
-import routes from 'routes';
+import Routes from 'routes';
 import { calculateRem, mobileWidth } from 'styles';
 
 export const App = ({ history }) => {
   return (
     <ConnectedRouter history={history}>
-      <MainContainer>{routes}</MainContainer>
+      <MainContainer>
+        <Routes />
+      </MainContainer>
     </ConnectedRouter>
   );
 };

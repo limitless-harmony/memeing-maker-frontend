@@ -1,2 +1,4 @@
-export const WELCOME_ACTION = 'WELCOME_ACTION';
-export const CURRENT_TIME = 'CURRENT_TIME';
+export const SHOW_MODAL = 'SHOW_MODAL';
+export const HIDE_MODAL = 'HIDE_MODAL';
+export const USER_LOGGED_IN = 'USER_LOGGED_IN';
+export const LOG_OUT = 'LOG_OUT';

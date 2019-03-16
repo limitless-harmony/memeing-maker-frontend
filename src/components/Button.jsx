@@ -33,7 +33,7 @@ export const StyledButton = styled.button`
   margin: ${calculateRem(10)};
   padding: ${calculateRem(3)} ${calculateRem(30)};
   &:hover {
-    background-color: ${({ color }) => darken(color, 0.35)};
+    background-color: ${({ color }) => darken(color, 0.05)};
     color: ${white};
   }
 `;

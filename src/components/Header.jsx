@@ -1,28 +1,44 @@
 import React, { Component } from 'react';
 // import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import { calculateRem, mobileWidth } from 'styles';
 import { ShareButton, Discover, Ellipsis, Create } from 'components/Icons';
 import { white } from 'styles/colors';
+import { showModal } from 'actions/modal';
 
-class Header extends Component {
+export class Header extends Component {
   static propTypes = {};
 
-  share = () => {};
+  share = () => {
+    const { isLoggedIn, actions } = this.props;
+    if (!isLoggedIn) {
+      return actions.showModal();
+    }
+    // TODO: Share the meme/view
+    return true;
+  };
 
   render() {
     return (
       <StyledHeader>
         <NavLeft>
           <NavItem first>
-            <Discover />
+            <Link to="/discover">
+              <Discover />
+            </Link>
           </NavItem>
           <NavItem>
-            <Create />
+            <Link to="/create">
+              <Create />
+            </Link>
           </NavItem>
           <NavItem>
-            <ShareButton width="18" height="18" />
+            <ShareButton width="18" height="18" onClick={this.share} />
           </NavItem>
         </NavLeft>
         <NavRight>
@@ -54,6 +70,7 @@ const NavItem = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  cursor: pointer;
   margin: ${({ first, last }) =>
     first
       ? `0 ${calculateRem(5)} 0 0`
@@ -75,4 +92,20 @@ const NavRight = styled(NavSection)`
   justify-content: flex-end;
 `;
 
-export default Header;
+Header.propTypes = {
+  isLoggedIn: PropTypes.bool.isRequired,
+  actions: PropTypes.shape({}).isRequired,
+};
+
+const mapStateToProps = state => ({
+  isLoggedIn: state.auth.isLoggedIn,
+});
+
+const mapDispatchToProps = dispatch => ({
+  actions: bindActionCreators({ showModal }, dispatch),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Header);
