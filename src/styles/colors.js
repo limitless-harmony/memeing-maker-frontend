@@ -2,7 +2,7 @@ import Color from 'color';
 
 export const black = '#000';
 export const white = '#FFF';
-export const indigo = '#303F9F';
+export const buttonBorder = '#979797';
 export const green = '#01BF8D';
 
 export const darken = (color, value) => {

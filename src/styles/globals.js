@@ -1,7 +1,8 @@
 import styledNormalize from 'styled-normalize';
 import { createGlobalStyle } from 'styled-components';
-import { baseSize, calculateRem } from '.';
-import { white, black } from './colors';
+
+import { white, black } from 'styles/colors';
+import { baseSize, calculateRem } from 'styles';
 
 const globalStyles = createGlobalStyle`
   ${styledNormalize}
@@ -13,8 +14,12 @@ const globalStyles = createGlobalStyle`
 
   body {
     background-color: ${white};
+    margin: auto;
+    padding: ${calculateRem(70)} 0 0;
     color: ${black};
     font-size: ${baseSize}px;
+    font-family: 'Lucida grande';
+    min-height: 100%;
     position:relative;
   }
   * {
@@ -23,14 +28,6 @@ const globalStyles = createGlobalStyle`
   #root {
     display: flex;
     min-height: 100%;
-  }
-  
-  h2 {
-    font-size: ${calculateRem(50)};
-  }
-  p {
-    font-size: ${calculateRem(18)};
-    line-height: 1.5;
   }
 `;
 

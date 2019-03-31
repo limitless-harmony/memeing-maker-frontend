@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing the Button component renders without crashing 1`] = `
+<styled.button
+  color="#01BF8D"
+  fullWidth={false}
+  outline={false}
+  rounded={false}
+>
+  Submit
+</styled.button>
+`;
