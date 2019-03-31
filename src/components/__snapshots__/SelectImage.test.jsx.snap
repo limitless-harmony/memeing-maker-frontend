@@ -3,27 +3,16 @@
 exports[`Testing the SelectImage page component renders without crashing 1`] = `
 <styled.div>
   <styled.div>
-    <Input
-      filled={true}
-      name="imageUrl"
-      onChange={[Function]}
-      placeholder="Insert image url"
-      textAlign="left"
-      value=""
-    />
-    <styled.div>
-      <ForwardRef />
-    </styled.div>
-  </styled.div>
-  <styled.div>
-    <styled.img
+    <ImageIcon
       src="camera.png"
+      width={50}
     />
     <styled.label
       htmlFor="image"
     >
-      <styled.img
+      <ImageIcon
         src="folder.png"
+        width={50}
       />
       <input
         accept="image/*"
@@ -32,7 +21,7 @@ exports[`Testing the SelectImage page component renders without crashing 1`] = `
         type="file"
       />
     </styled.label>
-    <styled.img
+    <ImageIcon
       src="gallery.png"
     />
   </styled.div>

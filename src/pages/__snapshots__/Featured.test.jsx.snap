@@ -13,44 +13,23 @@ exports[`Testing the Featured page component renders without crashing 1`] = `
   </styled.div>
   <Masonry>
     <MemeCard
-      bottomText="New every time"
-      imageUrl="https://loremflickr.com/240/320"
-      topText="Randomly generated"
+      src="meme.png"
     />
     <MemeCard
-      bottomText="A bottom text"
-      imageUrl="yes.png"
-      topText="A top text"
+      src="meme1.png"
     />
     <MemeCard
-      bottomText="And you know that you know"
-      imageUrl="sense.jpg"
-      topText="When you know"
+      src="meme2.png"
     />
     <MemeCard
-      bottomText="Duh! You have no idea. I am like the wind!"
-      imageUrl="duh.jpg"
-      topText="You think you know me"
+      src="meme3.png"
     />
     <MemeCard
-      bottomText="Duh! You have no idea. I am like the wind!"
-      imageUrl="https://loremflickr.com/320/240"
-      topText="You think you know me"
-    />
-    <MemeCard
-      bottomText="New every time"
-      imageUrl="https://loremflickr.com/240/320"
-      topText="Randomly generated"
-    />
-    <MemeCard
-      bottomText="New every time"
-      imageUrl="https://loremflickr.com/240/320"
-      topText="Randomly generated"
+      src="meme4.png"
     />
   </Masonry>
   <Button
     color="#979797"
-    fullWidth={false}
     outline={true}
     rounded={true}
   >

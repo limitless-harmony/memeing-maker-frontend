@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing the ImageIcon component renders without crashing 1`] = `
+<styled.img
+  height={40}
+  src="www.me.memememem"
+  width={40}
+/>
+`;
