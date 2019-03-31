@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing the Header component renders without crashing 1`] = `
+<styled.header>
+  <Styled(styled.div)>
+    <styled.div
+      first={true}
+    >
+      <Link
+        replace={false}
+        to="/discover"
+      >
+        <ForwardRef />
+      </Link>
+    </styled.div>
+    <styled.div>
+      <Link
+        replace={false}
+        to="/create"
+      >
+        <ForwardRef />
+      </Link>
+    </styled.div>
+    <styled.div>
+      <ForwardRef
+        height="18"
+        onClick={[Function]}
+        width="18"
+      />
+    </styled.div>
+  </Styled(styled.div)>
+  <Styled(styled.div)>
+    <styled.div
+      last={true}
+    >
+      <ForwardRef />
+    </styled.div>
+  </Styled(styled.div)>
+</styled.header>
+`;

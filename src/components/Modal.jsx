@@ -54,16 +54,6 @@ const Head = styled.div`
   width: 100%;
 `;
 
-// const Body = styled.div`
-//   display: flex;
-//   /* margin-top: ${calculateRem(70)}; */
-//   justify-content: ${({ justifyContent }) => justifyContent || 'center'};
-//   flex-wrap: nowrap;
-//   padding: ${calculateRem(14)} 0;
-//   height: ${calculateRem(40)};
-//   width: 100%;
-// `;
-
 const CloseButton = styled.span`
   border-radius: 50%;
   border: 1px solid ${buttonBorder};
