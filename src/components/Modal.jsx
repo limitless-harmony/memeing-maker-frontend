@@ -31,7 +31,7 @@ export class Modal extends Component {
 const StyledModal = styled.div`
   z-index: 20;
   text-align: center;
-  padding: 0 ${calculateRem(14)};
+  padding: ${calculateRem(14)};
   background: ${white};
   position: fixed;
   height: 100%;
@@ -39,6 +39,7 @@ const StyledModal = styled.div`
   max-width: ${calculateRem(mobileWidth)};
   left: 50%;
   top: 0%;
+  overflow-y: auto;
   transform: translateX(-50%);
   box-sizing: border-box;
   display: flex;
@@ -50,20 +51,8 @@ const Head = styled.div`
   display: flex;
   justify-content: flex-end;
   flex-wrap: nowrap;
-  padding: ${calculateRem(14)} 0;
-  height: ${calculateRem(40)};
   width: 100%;
 `;
-
-// const Body = styled.div`
-//   display: flex;
-//   /* margin-top: ${calculateRem(70)}; */
-//   justify-content: ${({ justifyContent }) => justifyContent || 'center'};
-//   flex-wrap: nowrap;
-//   padding: ${calculateRem(14)} 0;
-//   height: ${calculateRem(40)};
-//   width: 100%;
-// `;
 
 const CloseButton = styled.span`
   border-radius: 50%;

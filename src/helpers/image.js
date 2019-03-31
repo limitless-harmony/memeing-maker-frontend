@@ -14,7 +14,6 @@ export const createImage = async src => {
 };
 
 export const getCroppedImage = (image, cropArea) => {
-  console.log(image, cropArea);
   const canvas = document.createElement('canvas');
   canvas.width = cropArea.width;
   canvas.height = cropArea.height;
