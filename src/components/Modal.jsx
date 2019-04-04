@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import ReactDom from 'react-dom';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -30,25 +29,28 @@ export class Modal extends Component {
 }
 
 const StyledModal = styled.div`
-  z-index: 5;
+  z-index: 20;
   text-align: center;
-  padding: 0 ${calculateRem(14)};
+  padding: ${calculateRem(14)};
   background: ${white};
   position: fixed;
   height: 100%;
   width: 100%;
-  max-width: ${mobileWidth};
+  max-width: ${calculateRem(mobileWidth)};
   left: 50%;
   top: 0%;
+  overflow-y: auto;
   transform: translateX(-50%);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 `;
 
 const Head = styled.div`
   display: flex;
   justify-content: flex-end;
   flex-wrap: nowrap;
-  padding: ${calculateRem(14)} 0;
-  height: ${calculateRem(40)};
   width: 100%;
 `;
 
@@ -58,15 +60,9 @@ const CloseButton = styled.span`
   padding: ${calculateRem(2)};
   cursor: pointer;
   vertical-align: center;
-  width: ${calculateRem(25)};
-  height: ${calculateRem(25)};
+  width: ${calculateRem(20)};
+  height: ${calculateRem(20)};
 `;
-
-Modal.propTypes = {
-  actions: PropTypes.shape({}).isRequired,
-  children: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
-    .isRequired,
-};
 
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators({ hideModal }, dispatch),

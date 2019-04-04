@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing the CreateMeme page component renders without crashing 1`] = `
+<Fragment>
+  <styled.div>
+    <MemePreview
+      bottomText=""
+      onImageClick={[Function]}
+      topText=""
+    />
+  </styled.div>
+  <Input
+    name="topText"
+    onChange={[Function]}
+    placeholder="Click to enter top text"
+    underline={true}
+    value=""
+  />
+  <Input
+    name="bottomText"
+    onChange={[Function]}
+    placeholder="Click to enter bottom text"
+    underline={true}
+    value=""
+  />
+  <styled.div>
+    Post to
+    <styled.button
+      onClick={[Function]}
+    >
+      Memeing Maker
+    </styled.button>
+    <ForwardRef />
+  </styled.div>
+</Fragment>
+`;

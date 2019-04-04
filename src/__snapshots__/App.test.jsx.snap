@@ -23,28 +23,7 @@ exports[`Testing the Root component renders without crashing 1`] = `
     }
   }
 >
-  <styled.div
-    history={
-      Object {
-        "action": "POP",
-        "block": [Function],
-        "createHref": [Function],
-        "go": [Function],
-        "goBack": [Function],
-        "goForward": [Function],
-        "length": 1,
-        "listen": [Function],
-        "location": Object {
-          "hash": "",
-          "pathname": "/",
-          "search": "",
-          "state": undefined,
-        },
-        "push": [Function],
-        "replace": [Function],
-      }
-    }
-  >
+  <styled.div>
     <Connect(Routes) />
   </styled.div>
 </Connect(ConnectedRouterWithContext)>

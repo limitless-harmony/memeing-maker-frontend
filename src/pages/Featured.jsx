@@ -5,9 +5,11 @@ import { calculateRem } from 'styles';
 import Masonry from 'components/Masonry';
 import MemeCard from 'components/MemeCard';
 import Button from 'components/Button';
-import Yes from 'assets/images/yes.png';
-import Sense from 'assets/images/sense.jpg';
-import Duh from 'assets/images/duh.jpg';
+import meme from 'assets/memes/meme.png';
+import meme1 from 'assets/memes/meme1.png';
+import meme2 from 'assets/memes/meme2.png';
+import meme3 from 'assets/memes/meme3.png';
+import meme4 from 'assets/memes/meme4.png';
 import { buttonBorder, black } from 'styles/colors';
 
 class Featured extends Component {
@@ -20,41 +22,11 @@ class Featured extends Component {
         <Title>Memeing Maker</Title>
         <SectionHeading>This Week’s Featured Memes</SectionHeading>
         <Masonry>
-          <MemeCard
-            imageUrl="https://loremflickr.com/240/320"
-            topText="Randomly generated"
-            bottomText="New every time"
-          />
-          <MemeCard
-            imageUrl={Yes}
-            topText="A top text"
-            bottomText="A bottom text"
-          />
-          <MemeCard
-            imageUrl={Sense}
-            topText="When you know"
-            bottomText="And you know that you know"
-          />
-          <MemeCard
-            imageUrl={Duh}
-            topText="You think you know me"
-            bottomText="Duh! You have no idea. I am like the wind!"
-          />
-          <MemeCard
-            imageUrl="https://loremflickr.com/320/240"
-            topText="You think you know me"
-            bottomText="Duh! You have no idea. I am like the wind!"
-          />
-          <MemeCard
-            imageUrl="https://loremflickr.com/240/320"
-            topText="Randomly generated"
-            bottomText="New every time"
-          />
-          <MemeCard
-            imageUrl="https://loremflickr.com/240/320"
-            topText="Randomly generated"
-            bottomText="New every time"
-          />
+          <MemeCard src={meme} />
+          <MemeCard src={meme1} />
+          <MemeCard src={meme2} />
+          <MemeCard src={meme3} />
+          <MemeCard src={meme4} />
         </Masonry>
         <Button color={buttonBorder} outline rounded>
           <ButtonText>More</ButtonText>

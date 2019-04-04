@@ -19,12 +19,12 @@ export const App = ({ history }) => {
 const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
   margin: 0 auto;
   font-size: inherit;
   padding: 0 ${calculateRem(14)};
   width: 100%;
-  max-width: ${mobileWidth};
+  max-width: ${calculateRem(mobileWidth)};
+  box-sizing: border-box;
 `;
 
 App.propTypes = {

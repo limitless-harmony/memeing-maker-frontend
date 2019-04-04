@@ -6,12 +6,12 @@ import rootReducer from 'reducers';
 
 export const history = createBrowserHistory();
 
-const configureStore = preloadedState => {
+const configureStore = preLoadedState => {
   const composeEnhancer =
     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
   const store = createStore(
     rootReducer(history),
-    preloadedState,
+    preLoadedState,
     composeEnhancer(applyMiddleware(routerMiddleware(history)))
   );
 
