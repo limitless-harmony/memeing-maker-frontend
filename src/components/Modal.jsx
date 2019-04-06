@@ -33,10 +33,10 @@ const StyledModal = styled.div`
   text-align: center;
   padding: ${calculateRem(14)};
   background: ${white};
-  position: fixed;
   height: 100%;
   width: 100%;
   max-width: ${calculateRem(mobileWidth)};
+  position: fixed;
   left: 50%;
   top: 0%;
   overflow-y: auto;

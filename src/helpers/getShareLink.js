@@ -1,10 +1,10 @@
 /* eslint-disable no-unused-vars */
 import objectToGetParams from 'helpers/encodeQueryString';
+import { name, tagline } from 'helpers';
 
-const slogan = 'Make meaning. Share memes.';
 const text = {
-  single: `Check out this meme on memeing maker\n\n${slogan}`,
-  multiple: `Check out these memes on memeing maker\n\n${slogan}`,
+  single: `Check out this meme on ${name}\n\n${tagline}`,
+  multiple: `Check out these memes on ${name}\n\n${tagline}`,
 };
 
 const getShareLink = (url, network, contentType = 'single') => {

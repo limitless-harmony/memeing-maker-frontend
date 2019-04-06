@@ -1,5 +1,8 @@
 export const SHOW_MODAL = 'SHOW_MODAL';
 export const HIDE_MODAL = 'HIDE_MODAL';
+export const IS_LOADING = 'IS_LOADING';
+export const IS_COMPLETE = 'IS_COMPLETE';
+export const TOGGLE_MENU = 'TOGGLE_MENU';
 export const USER_LOGGED_IN = 'USER_LOGGED_IN';
 export const LOG_OUT = 'LOG_OUT';
 export const SELECT_IMAGE = 'SELECT_IMAGE';

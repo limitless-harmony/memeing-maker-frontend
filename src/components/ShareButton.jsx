@@ -15,11 +15,7 @@ export class ShareButton extends PureComponent {
 
   onClick = () => {
     const { REACT_APP_APP_URL } = process.env;
-    const {
-      network,
-      actions,
-      router: { location },
-    } = this.props;
+    const { network, actions, location } = this.props;
     const path = this.getPath(location.pathname);
     const url = `${REACT_APP_APP_URL}${path}`;
     const shareUrl = getShareLink(url, network);
@@ -47,7 +43,7 @@ const Button = styled.div`
 `;
 
 const mapStateToProps = state => ({
-  router: state.router,
+  location: state.router.location,
 });
 
 const mapDispatchToProps = dispatch => ({

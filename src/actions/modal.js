@@ -1,4 +1,4 @@
-import { HIDE_MODAL, SHOW_MODAL } from 'shared/constants/actionTypes';
+import { HIDE_MODAL, SHOW_MODAL } from 'constants/actionTypes';
 
 export const showModal = id => {
   return {

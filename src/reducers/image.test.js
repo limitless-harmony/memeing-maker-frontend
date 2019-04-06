@@ -1,6 +1,6 @@
 // Modules
 import imageReducer from 'reducers/image';
-import { REMOVE_IMAGE, SELECT_IMAGE } from 'shared/constants/actionTypes';
+import { REMOVE_IMAGE, SELECT_IMAGE } from 'constants/actionTypes';
 
 describe('modal reducer', () => {
   const initialState = {

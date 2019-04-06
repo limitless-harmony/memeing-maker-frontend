@@ -1,6 +1,6 @@
 // Modules
 import { showModal, hideModal } from 'actions/modal';
-import { SHOW_MODAL, HIDE_MODAL } from 'shared/constants/actionTypes';
+import { SHOW_MODAL, HIDE_MODAL } from 'constants/actionTypes';
 
 describe('modal action', () => {
   it('returns showModal action', async () => {

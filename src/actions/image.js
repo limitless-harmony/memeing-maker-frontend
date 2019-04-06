@@ -1,4 +1,4 @@
-import { REMOVE_IMAGE, SELECT_IMAGE } from 'shared/constants/actionTypes';
+import { REMOVE_IMAGE, SELECT_IMAGE } from 'constants/actionTypes';
 
 export const selectImage = imageUrl => {
   return {

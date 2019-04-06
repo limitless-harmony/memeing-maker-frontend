@@ -10,12 +10,16 @@ import Authentication from 'components/Authentication';
 import RootModal from 'components/Modal';
 import SelectImageModal from 'components/SelectImage';
 import ShareModal from 'components/Share';
+import OverlayMenu from 'components/Menu';
+import Loading from 'components/Loading';
 
-const Routes = ({ showModal, modalId }) => {
+const Routes = ({ loading, showMenu, showModal, modalId }) => {
   return (
     <React.Fragment>
       <GlobalStyles />
       <Navbar />
+      {showMenu && <OverlayMenu />}
+      {loading && <Loading />}
       <Switch>
         <Route exact path="/" component={Featured} />
         <Route component={AuthRoutes} />
@@ -33,7 +37,9 @@ const Routes = ({ showModal, modalId }) => {
 
 const mapStateToProps = state => ({
   showModal: state.modal.show,
+  showMenu: state.menu.show,
   modalId: state.modal.id,
+  loading: state.loading.status,
 });
 
 export default connect(mapStateToProps)(Routes);

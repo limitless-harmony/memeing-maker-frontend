@@ -10,16 +10,20 @@ import { calculateRem, mobileWidth } from 'styles';
 import { ShareButton, Discover, Ellipsis, Create } from 'components/Icons';
 import { white } from 'styles/colors';
 import { showModal } from 'actions/modal';
+import toggleMenu from 'actions/menu';
 
 export class Header extends Component {
-  static propTypes = {};
-
   share = () => {
     const { isLoggedIn, actions } = this.props;
     if (!isLoggedIn) {
       return actions.showModal('auth');
     }
     return actions.showModal('share');
+  };
+
+  toggleMenu = () => {
+    const { actions, menuStatus } = this.props;
+    return actions.toggleMenu(!menuStatus);
   };
 
   render() {
@@ -42,7 +46,7 @@ export class Header extends Component {
         </NavLeft>
         <NavRight>
           <NavItem last>
-            <Ellipsis />
+            <Ellipsis onClick={this.toggleMenu} />
           </NavItem>
         </NavRight>
       </StyledHeader>
@@ -99,11 +103,12 @@ Header.propTypes = {
 };
 
 const mapStateToProps = state => ({
+  menuStatus: state.menu.show,
   isLoggedIn: state.auth.isLoggedIn,
 });
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators({ showModal }, dispatch),
+  actions: bindActionCreators({ showModal, toggleMenu }, dispatch),
 });
 
 export default connect(

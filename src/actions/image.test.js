@@ -1,6 +1,6 @@
 // Modules
 import { selectImage, removeImage } from 'actions/image';
-import { REMOVE_IMAGE, SELECT_IMAGE } from 'shared/constants/actionTypes';
+import { REMOVE_IMAGE, SELECT_IMAGE } from 'constants/actionTypes';
 
 describe('image action', () => {
   it('returns selectImage action', async () => {
