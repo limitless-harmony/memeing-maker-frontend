@@ -13,6 +13,8 @@ describe('Testing the SelectImage page component', () => {
     actions: {
       hideModal: mockFunction,
       selectImage: mockFunction,
+      startLoader: mockFunction,
+      stopLoader: mockFunction,
     },
   };
   it('renders without crashing', () => {

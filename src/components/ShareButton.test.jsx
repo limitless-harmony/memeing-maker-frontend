@@ -6,10 +6,8 @@ import { ShareButton } from 'components/ShareButton';
 const mockFunction = jest.fn();
 describe('Testing the ShareButton component', () => {
   const props = {
-    router: {
-      location: {
-        pathname: '/',
-      },
+    location: {
+      pathname: '/',
     },
     network: 'facebook',
     actions: {

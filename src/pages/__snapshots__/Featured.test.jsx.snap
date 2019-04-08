@@ -3,7 +3,7 @@
 exports[`Testing the Featured page component renders without crashing 1`] = `
 <styled.div>
   <styled.div>
-    Make meaning. Share meaning.
+    Make meaning. Share memes.
   </styled.div>
   <styled.div>
     Memeing Maker
@@ -11,23 +11,33 @@ exports[`Testing the Featured page component renders without crashing 1`] = `
   <styled.div>
     This Week’s Featured Memes
   </styled.div>
-  <Masonry>
-    <MemeCard
-      src="meme.png"
-    />
-    <MemeCard
-      src="meme1.png"
-    />
-    <MemeCard
-      src="meme2.png"
-    />
-    <MemeCard
-      src="meme3.png"
-    />
-    <MemeCard
-      src="meme4.png"
-    />
-  </Masonry>
+  <styled.div>
+    <styled.div>
+      <MemeCard
+        src="meme.png"
+      />
+    </styled.div>
+    <styled.div>
+      <MemeCard
+        src="meme1.png"
+      />
+    </styled.div>
+    <styled.div>
+      <MemeCard
+        src="meme2.png"
+      />
+    </styled.div>
+    <styled.div>
+      <MemeCard
+        src="meme3.png"
+      />
+    </styled.div>
+    <styled.div>
+      <MemeCard
+        src="meme4.png"
+      />
+    </styled.div>
+  </styled.div>
   <Button
     color="#979797"
     outline={true}

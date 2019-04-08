@@ -1,5 +1,5 @@
 import React from 'react';
-import meme from 'assets/memes/meme.png';
+import meme2 from 'assets/memes/meme2.png';
 import styled from 'styled-components';
 
 import { calculateRem } from 'styles';
@@ -9,7 +9,7 @@ import { black } from 'styles/colors';
 
 const Single = () => (
   <Container>
-    <MemeCard square src={meme} />
+    <MemeCard square src={meme2} />
     <ReactionContainer>
       <ThanksReaction />
     </ReactionContainer>
