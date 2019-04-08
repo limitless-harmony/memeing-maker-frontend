@@ -9,6 +9,7 @@ import Navbar from 'components/Header';
 import Authentication from 'components/Authentication';
 import RootModal from 'components/Modal';
 import SelectImageModal from 'components/SelectImage';
+import ShareModal from 'components/Share';
 
 const Routes = ({ showModal, modalId }) => {
   return (
@@ -23,6 +24,7 @@ const Routes = ({ showModal, modalId }) => {
         <RootModal>
           {modalId === 'auth' && <Authentication />}
           {modalId === 'select-image' && <SelectImageModal />}
+          {modalId === 'share' && <ShareModal />}
         </RootModal>
       )}
     </React.Fragment>

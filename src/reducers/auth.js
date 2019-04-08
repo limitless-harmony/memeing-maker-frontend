@@ -1,7 +1,7 @@
 import { USER_LOGGED_IN, LOG_OUT } from 'shared/constants/actionTypes';
 
 const initialState = {
-  isLoggedIn: false,
+  isLoggedIn: true,
   user: null,
 };
 

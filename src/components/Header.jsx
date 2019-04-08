@@ -19,8 +19,7 @@ export class Header extends Component {
     if (!isLoggedIn) {
       return actions.showModal('auth');
     }
-    // TODO: Share the meme/view
-    return true;
+    return actions.showModal('share');
   };
 
   render() {
