@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 
 import { hideModal } from 'actions/modal';
 import { selectImage } from 'actions/image';
+import { startLoader, stopLoader } from 'actions/loading';
 import { calculateRem } from 'styles';
 import CropImage from 'components/CropImage';
 import Button from 'components/Button';
@@ -54,8 +55,11 @@ export class SelectImage extends Component {
   };
 
   onFileChange = async e => {
+    const { actions } = this.props;
     if (e.target.files && e.target.files.length > 0) {
+      actions.startLoader();
       const imageDataUrl = await readFile(e.target.files[0]);
+      actions.stopLoader();
       this.setState({
         imageUrl: imageDataUrl,
       });
@@ -134,7 +138,10 @@ const Label = styled.label`
 `;
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators({ hideModal, selectImage }, dispatch),
+  actions: bindActionCreators(
+    { hideModal, selectImage, startLoader, stopLoader },
+    dispatch
+  ),
 });
 
 export default connect(

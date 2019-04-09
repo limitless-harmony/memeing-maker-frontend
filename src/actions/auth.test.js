@@ -1,6 +1,6 @@
 // Modules
 import { login, logout } from 'actions/auth';
-import { USER_LOGGED_IN, LOG_OUT } from 'shared/constants/actionTypes';
+import { USER_LOGGED_IN, LOG_OUT } from 'constants/actionTypes';
 
 describe('auth', () => {
   it('returns login action', async () => {

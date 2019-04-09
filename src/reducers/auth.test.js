@@ -1,6 +1,6 @@
 // Modules
 import authReducer from 'reducers/auth';
-import { USER_LOGGED_IN, LOG_OUT } from 'shared/constants/actionTypes';
+import { USER_LOGGED_IN, LOG_OUT } from 'constants/actionTypes';
 
 describe('auth reducer', () => {
   const initialState = {

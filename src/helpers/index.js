@@ -11,3 +11,9 @@ export const camelize = string => {
   });
   return capitalized.join('');
 };
+
+// constants
+export const name = 'Memeing Maker';
+export const tagline = 'Make meaning. Share memes.';
+export const orgName = 'Limitless Harmony';
+export const loadingText = 'Meaning Loading...';

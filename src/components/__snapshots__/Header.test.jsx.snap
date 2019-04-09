@@ -33,7 +33,9 @@ exports[`Testing the Header component renders without crashing 1`] = `
     <styled.div
       last={true}
     >
-      <ForwardRef />
+      <ForwardRef
+        onClick={[Function]}
+      />
     </styled.div>
   </Styled(styled.div)>
 </styled.header>

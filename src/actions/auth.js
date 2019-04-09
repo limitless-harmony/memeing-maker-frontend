@@ -1,4 +1,4 @@
-import { USER_LOGGED_IN, LOG_OUT } from 'shared/constants/actionTypes';
+import { USER_LOGGED_IN, LOG_OUT } from 'constants/actionTypes';
 
 export const login = user => {
   return {

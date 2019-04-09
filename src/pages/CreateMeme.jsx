@@ -11,6 +11,7 @@ import MemePreview from 'components/MemePreview';
 import { inputFill } from 'styles/colors';
 import { calculateRem } from 'styles';
 import { getFullImage, composeImage } from 'helpers/image';
+import { name } from 'helpers';
 import defaultImage from 'assets/images/dank.png';
 
 export class CreateMeme extends Component {
@@ -84,7 +85,7 @@ export class CreateMeme extends Component {
         />
         <ButtonContainer>
           Post to
-          <SubmitMeme onClick={this.composeMeme}>Memeing Maker</SubmitMeme>
+          <SubmitMeme onClick={this.composeMeme}>{name}</SubmitMeme>
           <GoArrow />
         </ButtonContainer>
       </Fragment>

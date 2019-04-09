@@ -1,6 +1,6 @@
 // Modules
 import modalReducer from 'reducers/modal';
-import { SHOW_MODAL, HIDE_MODAL } from 'shared/constants/actionTypes';
+import { SHOW_MODAL, HIDE_MODAL } from 'constants/actionTypes';
 
 describe('modal reducer', () => {
   const initialState = {

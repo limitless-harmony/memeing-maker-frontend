@@ -13,7 +13,8 @@ const StyledMasonry = styled.div`
   column-gap: ${calculateRem(11)};
   column-fill: balance;
   width: 100%;
-  margin: 0 0 ${calculateRem(60)};
+  margin-bottom: ${calculateRem(60)};
+  overflow: visible;
 `;
 
 Masonry.propTypes = {
