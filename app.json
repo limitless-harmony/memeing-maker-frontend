@@ -9,6 +9,7 @@
   ],
   "description": "",
   "env": {
+    "NODE_PATH": "src/"
   },
   "formation": {
   },
