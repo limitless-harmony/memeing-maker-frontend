@@ -4,11 +4,12 @@
   ],
   "buildpacks": [
     {
-      "url": "heroku/nodejs"
+      "url": "mars/create-react-app"
     }
   ],
   "description": "",
   "env": {
+    "NODE_PATH": "src/"
   },
   "formation": {
   },

@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { calculateRem } from 'styles';
@@ -16,9 +15,5 @@ const StyledMasonry = styled.div`
   margin-bottom: ${calculateRem(60)};
   overflow: visible;
 `;
-
-Masonry.propTypes = {
-  children: PropTypes.arrayOf(PropTypes.element).isRequired,
-};
 
 export default Masonry;

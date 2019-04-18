@@ -14,10 +14,10 @@ export class ShareButton extends PureComponent {
   };
 
   onClick = () => {
-    const { REACT_APP_APP_URL } = process.env;
-    const { network, actions, location } = this.props;
-    const path = this.getPath(location.pathname);
-    const url = `${REACT_APP_APP_URL}${path}`;
+    const { origin, pathname } = window.location;
+    const { network, actions } = this.props;
+    const path = this.getPath(pathname);
+    const url = `${origin}${path}`;
     const shareUrl = getShareLink(url, network);
     window.open(shareUrl);
     actions.hideModal();

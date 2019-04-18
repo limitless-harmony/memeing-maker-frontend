@@ -1,30 +1,22 @@
 import React from 'react';
-import meme2 from 'assets/memes/meme2.png';
 import styled from 'styled-components';
 
+import meme from 'assets/memes/meme.png';
 import { calculateRem } from 'styles';
 import MemeCard from 'components/MemeCard';
+import { Container } from 'pages/Wall';
 import { ThanksReaction } from 'components/Icons';
 import { black } from 'styles/colors';
 
 const Single = () => (
   <Container>
-    <MemeCard square src={meme2} />
+    <MemeCard square src={meme} />
     <ReactionContainer>
       <ThanksReaction />
     </ReactionContainer>
     <ReactionCount>200</ReactionCount>
   </Container>
 );
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: ${calculateRem(18)} auto ${calculateRem(40)};
-  width: 100%;
-`;
 
 const ReactionContainer = styled.div`
   display: flex;
