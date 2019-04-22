@@ -11,7 +11,6 @@ import CropImage from 'components/CropImage';
 import Button from 'components/Button';
 import ImageIcon from 'components/ImageIcon';
 import folder from 'assets/icons/folder.png';
-import camera from 'assets/icons/camera.png';
 import gallery from 'assets/icons/gallery.png';
 import { getCroppedImage, readFile } from 'helpers/image';
 
@@ -71,7 +70,6 @@ export class SelectImage extends Component {
     return (
       <StyledSelectImage>
         <IconSection>
-          <ImageIcon width={50} src={camera} />
           <Label htmlFor="image">
             <ImageIcon width={50} src={folder} />
             <input

@@ -2,8 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { calculateRem, setFontSize } from 'styles';
 
-const MemeText = ({ text }) => (
-  <StyledMemeText>
+const MemeText = ({ text, square, small, top }) => (
+  <StyledMemeText square={square} top={top}>
     <svg
       style={{ display: 'block' }}
       width="100%"
@@ -21,7 +21,7 @@ const MemeText = ({ text }) => (
         height="100%"
       />
     </svg>
-    <StyledText text={text}>
+    <StyledText small={small} text={text}>
       <div>{text}</div>
     </StyledText>
   </StyledMemeText>
@@ -29,6 +29,14 @@ const MemeText = ({ text }) => (
 
 const StyledMemeText = styled.div`
   position: relative;
+  svg {
+    border-radius: ${({ square, top }) =>
+      square
+        ? 'none'
+        : top
+        ? `${calculateRem(7)} ${calculateRem(7)} 0 0`
+        : `0 0 ${calculateRem(7)} ${calculateRem(7)}`};
+  }
 `;
 
 const StyledText = styled.div`
@@ -50,7 +58,7 @@ const StyledText = styled.div`
     align-items: center;
     text-align: center;
     font-weight: 900;
-    font-size: ${({ text }) => calculateRem(setFontSize(text))};
+    font-size: ${({ text, small }) => calculateRem(setFontSize(text, small))};
   }
 `;
 

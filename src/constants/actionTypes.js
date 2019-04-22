@@ -7,3 +7,5 @@ export const USER_LOGGED_IN = 'USER_LOGGED_IN';
 export const LOG_OUT = 'LOG_OUT';
 export const SELECT_IMAGE = 'SELECT_IMAGE';
 export const REMOVE_IMAGE = 'REMOVE_IMAGE';
+export const SET_MEMES = 'SET_MEMES';
+export const SET_FEATURED_MEMES = 'SET_FEATURED_MEMES';
