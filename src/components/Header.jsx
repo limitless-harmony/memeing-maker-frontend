@@ -31,7 +31,7 @@ export class Header extends Component {
       <StyledHeader>
         <NavLeft>
           <NavItem first>
-            <Link to="/discover">
+            <Link to="/">
               <Discover />
             </Link>
           </NavItem>

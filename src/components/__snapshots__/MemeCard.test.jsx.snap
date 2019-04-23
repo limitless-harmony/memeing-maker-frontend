@@ -1,3 +1,32 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Testing the MemeCard component renders without crashing 1`] = `<styled.img />`;
+exports[`Testing the MemeCard component renders without crashing 1`] = `
+<styled.div>
+  <MemeText
+    text="A top text"
+    top={true}
+  />
+  <svg
+    id="svg_ref"
+    style={
+      Object {
+        "display": "block",
+      }
+    }
+    viewBox="0 0 400 400"
+    width="100%"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlnsXlink="http://www.w3.org/1999/xlink"
+  >
+    <image
+      height="100%"
+      width="100%"
+      x="0"
+      y="0"
+    />
+  </svg>
+  <MemeText
+    text="A bottom text"
+  />
+</styled.div>
+`;

@@ -12,6 +12,7 @@ describe('Testing the CreateMeme page component', () => {
     selectedImage: '/images/me.png',
     actions: {
       showModal: mockFunction,
+      create: mockFunction,
       selectImage: mockFunction,
     },
   };
@@ -46,11 +47,11 @@ describe('Testing the CreateMeme page component', () => {
     instance.selectImage();
     expect(mockFunction).toHaveBeenCalled();
   });
-  it('it composes the meme into an image', () => {
+  it('it creates a meme', () => {
     imageHelper.composeImage = mockFunction;
     const wrapper = mount(<CreateMeme {...props} />);
     const instance = wrapper.instance();
-    instance.composeMeme();
+    instance.createMeme();
     expect(mockFunction).toHaveBeenCalled();
   });
 });

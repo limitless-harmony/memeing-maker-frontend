@@ -4,13 +4,14 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import { selectImage } from 'actions/image';
+import { create } from 'actions/meme';
 import { showModal } from 'actions/modal';
 import Input from 'components/Input';
 import { GoArrow } from 'components/Icons';
 import MemePreview from 'components/MemePreview';
 import { inputFill } from 'styles/colors';
 import { calculateRem } from 'styles';
-import { getFullImage, composeImage } from 'helpers/image';
+import { getFullImage } from 'helpers/image';
 import { name } from 'helpers';
 import defaultImage from 'assets/images/dank.png';
 
@@ -39,11 +40,15 @@ export class CreateMeme extends Component {
     };
   };
 
-  composeMeme = () => {
-    const style = {
-      viewBox: '0 0 800 1200',
-    };
-    composeImage(this.captureDiv, style);
+  createMeme = async () => {
+    const { topText, bottomText } = this.state;
+    const { actions, selectedImage } = this.props;
+    actions.create({
+      topText,
+      bottomText,
+      image: selectedImage,
+      userId: '56gdfre67746ndg',
+    });
   };
 
   changeText = event => {
@@ -57,11 +62,7 @@ export class CreateMeme extends Component {
     const { selectedImage } = this.props;
     return (
       <Fragment>
-        <PreviewContainer
-          ref={div => {
-            this.captureDiv = div;
-          }}
-        >
+        <PreviewContainer>
           <MemePreview
             image={selectedImage}
             topText={topText}
@@ -85,7 +86,7 @@ export class CreateMeme extends Component {
         />
         <ButtonContainer>
           Post to
-          <SubmitMeme onClick={this.composeMeme}>{name}</SubmitMeme>
+          <SubmitMeme onClick={this.createMeme}>{name}</SubmitMeme>
           <GoArrow />
         </ButtonContainer>
       </Fragment>
@@ -122,7 +123,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators({ showModal, selectImage }, dispatch),
+  actions: bindActionCreators({ showModal, selectImage, create }, dispatch),
 });
 
 export default connect(

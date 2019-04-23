@@ -15,8 +15,8 @@ export const createImage = async src => {
 
 export const getCroppedImage = (image, cropArea) => {
   const canvas = document.createElement('canvas');
-  canvas.width = cropArea.width;
-  canvas.height = cropArea.height;
+  canvas.width = 400;
+  canvas.height = 400;
   const ctx = canvas.getContext('2d');
   ctx.drawImage(
     image,
@@ -26,8 +26,8 @@ export const getCroppedImage = (image, cropArea) => {
     cropArea.height,
     0,
     0,
-    cropArea.width,
-    cropArea.height
+    400,
+    400
   );
   const base64 = getBase64Image(canvas);
   return base64;
@@ -42,23 +42,30 @@ export const getFullImage = image => {
   return getBase64Image(canvas);
 };
 
-export const composeImage = async (captureDiv, style) => {
-  const dataUrl = await domToImage.toSvg(captureDiv, style);
+export const download = canvasData => {
+  const a = document.createElement('a');
+  a.download = 'meme.png';
+  a.href = canvasData;
+  document.body.appendChild(a);
+  a.click();
+};
+export const composeImage = async (capturedDiv, style) => {
+  const dataUrl = await domToImage.toSvg(capturedDiv, style);
   const canvas = document.createElement('canvas');
   canvas.setAttribute('id', 'canvas');
   canvas.width = 800;
   canvas.height = 1200;
   const img = document.createElement('img');
   img.setAttribute('src', `${dataUrl}`);
-  img.onload = () => {
-    canvas.getContext('2d').drawImage(img, 0, 0, 800, 1200);
-    const canvasData = canvas.toDataURL('image/png');
-    const a = document.createElement('a');
-    a.download = 'meme.png';
-    a.href = canvasData;
-    document.body.appendChild(a);
-    a.click();
-  };
+  let canvasData;
+  return new Promise((resolve, reject) => {
+    img.onload = () => {
+      canvas.getContext('2d').drawImage(img, 0, 0, 800, 1200);
+      canvasData = canvas.toDataURL('image/png');
+      resolve(canvasData);
+    };
+    img.onerror = reject;
+  });
 };
 
 export const readFile = file => {

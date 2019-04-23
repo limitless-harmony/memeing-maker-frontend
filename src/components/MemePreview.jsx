@@ -12,7 +12,7 @@ const MemePreview = ({ image, topText, bottomText, onImageClick }) => (
         style={{ display: 'block' }}
         width="100%"
         id="svg_ref"
-        viewBox="0 0 800 800"
+        viewBox="0 0 400 400"
         xmlns="http://www.w3.org/2000/svg"
         xmlnsXlink="http://www.w3.org/1999/xlink"
       >
