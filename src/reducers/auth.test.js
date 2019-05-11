@@ -4,7 +4,7 @@ import { USER_LOGGED_IN, LOG_OUT } from 'constants/actionTypes';
 
 describe('auth reducer', () => {
   const initialState = {
-    isLoggedIn: false,
+    authenticated: false,
     user: null,
   };
 
@@ -22,7 +22,7 @@ describe('auth reducer', () => {
       type: USER_LOGGED_IN,
       user,
     });
-    expect(state).toEqual({ isLoggedIn: true, user });
+    expect(state).toEqual({ authenticated: true, user });
   });
 
   it('logs out a user', async () => {

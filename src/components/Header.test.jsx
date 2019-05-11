@@ -6,7 +6,7 @@ import { Header } from 'components/Header';
 const mockFunction = jest.fn();
 describe('Testing the Header component', () => {
   const props = {
-    isLoggedIn: false,
+    authenticated: false,
     actions: {
       showModal: mockFunction,
     },

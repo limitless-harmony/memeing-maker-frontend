@@ -1,22 +1,28 @@
-import { USER_LOGGED_IN, LOG_OUT } from 'constants/actionTypes';
+import { USER_LOGGED_IN, LOG_OUT, SET_PATH_FROM } from 'constants/actionTypes';
 
 const initialState = {
-  isLoggedIn: true,
+  authenticated: false,
   user: null,
+  previous: '',
 };
 
-const auth = (state = initialState, { type, user }) => {
+const auth = (state = initialState, { type, user, path }) => {
   switch (type) {
     case USER_LOGGED_IN:
       return {
         ...state,
-        isLoggedIn: true,
+        authenticated: true,
         user,
+      };
+    case SET_PATH_FROM:
+      return {
+        ...state,
+        previous: path,
       };
     case LOG_OUT:
       return {
         ...state,
-        isLoggedIn: false,
+        authenticated: false,
         user: null,
       };
     default:

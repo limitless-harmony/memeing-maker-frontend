@@ -4,6 +4,7 @@ export const IS_LOADING = 'IS_LOADING';
 export const IS_COMPLETE = 'IS_COMPLETE';
 export const TOGGLE_MENU = 'TOGGLE_MENU';
 export const USER_LOGGED_IN = 'USER_LOGGED_IN';
+export const SET_PATH_FROM = 'SET_PATH_FROM';
 export const LOG_OUT = 'LOG_OUT';
 export const SELECT_IMAGE = 'SELECT_IMAGE';
 export const REMOVE_IMAGE = 'REMOVE_IMAGE';
