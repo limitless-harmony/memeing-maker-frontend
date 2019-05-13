@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import { calculateRem, mobileWidth } from 'styles';
 import { white, dark } from 'styles/colors';
@@ -16,22 +17,24 @@ export class Menu extends Component {
   };
 
   render() {
+    const { meme, wall } = this.props;
     return (
       <StyledMenu>
-        <MenuItem>
-          Meme created by
-          <Inlet>@username123</Inlet>
-        </MenuItem>
+        {meme && (
+          <MenuItem>
+            Meme created by
+            <Inlet>
+              <Link to={`/users/${meme.user.id}`}>@username123</Link>
+            </Inlet>
+          </MenuItem>
+        )}
         <MenuItem>
           Meme wall created by
-          <Inlet>@username123</Inlet>
+          <Inlet>
+            <Link to="users/">@username123</Link>
+          </Inlet>
         </MenuItem>
         <MenuItem>Flag meme</MenuItem>
-        <MenuItem>Mute meme</MenuItem>
-        <MenuItem>Mute meme</MenuItem>
-        <MenuItem>Mute player</MenuItem>
-        <MenuItem>Add meme to wall</MenuItem>
-        <MenuItem>Invite player to wall</MenuItem>
         <MenuItem>View player profile</MenuItem>
         <MenuItem>View your profile</MenuItem>
         <MenuItem>View rules of play</MenuItem>

@@ -13,7 +13,7 @@ import { inputFill } from 'styles/colors';
 import { calculateRem } from 'styles';
 import { getFullImage } from 'helpers/image';
 import { name } from 'helpers';
-import defaultImage from 'assets/images/dank.png';
+import { AddMeme } from 'components/Images';
 
 export class CreateMeme extends Component {
   state = {
@@ -33,7 +33,7 @@ export class CreateMeme extends Component {
   loadImage = () => {
     const { actions } = this.props;
     const img = document.createElement('img');
-    img.setAttribute('src', `${defaultImage}`);
+    img.setAttribute('src', `${AddMeme}`);
     img.onload = () => {
       const base64 = getFullImage(img);
       actions.selectImage(base64);
@@ -42,13 +42,14 @@ export class CreateMeme extends Component {
 
   createMeme = async () => {
     const { topText, bottomText } = this.state;
-    const { actions, selectedImage } = this.props;
-    actions.create({
+    const { actions, selectedImage, history } = this.props;
+    await actions.create({
       topText,
       bottomText,
       image: selectedImage,
-      userId: '56gdfre67746ndg',
+      user: '5cc5bb8a5bd3930939da5cb3',
     });
+    history.push('/');
   };
 
   changeText = event => {

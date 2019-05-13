@@ -6,6 +6,7 @@ import { dark } from 'styles/colors';
 import MemeText from 'components/MemeText';
 
 const MemeCard = ({ src, square, small, topText, bottomText }) => {
+  const defaultSrc = '/static/media/create-meme.bf0fa792.svg';
   return (
     <Meme square={square}>
       <MemeText square={square} text={topText} small={small} top />
@@ -17,7 +18,13 @@ const MemeCard = ({ src, square, small, topText, bottomText }) => {
         xmlns="http://www.w3.org/2000/svg"
         xmlnsXlink="http://www.w3.org/1999/xlink"
       >
-        <image x="0" y="0" xlinkHref={src} width="100%" height="100%" />
+        <image
+          x="0"
+          y="0"
+          xlinkHref={src || defaultSrc}
+          width="100%"
+          height="100%"
+        />
       </svg>
       <MemeText square={square} text={bottomText} small={small} />
     </Meme>

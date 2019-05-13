@@ -25,8 +25,8 @@ const store = createStore(rootReducer(history), preLoadedState, enhancer);
 
 store.subscribe(
   throttle(() => {
-    const { meme, auth } = store.getState();
-    return saveState({ meme, auth });
+    const { auth } = store.getState();
+    return saveState({ auth });
   }, 1000)
 );
 const configureStore = () => store;

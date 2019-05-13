@@ -25,7 +25,6 @@ export const login = (accessToken, provider) => async dispatch => {
     dispatch(startLoader());
     const url = `auth/${provider}/success?code=${accessToken}`;
     const response = await api.get(url);
-    console.log(response);
     const { data } = response.data;
     return dispatch(setUser(data));
   } catch (error) {

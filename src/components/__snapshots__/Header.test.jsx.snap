@@ -8,7 +8,7 @@ exports[`Testing the Header component renders without crashing 1`] = `
     >
       <Link
         replace={false}
-        to="/discover"
+        to="/"
       >
         <ForwardRef />
       </Link>

@@ -3,34 +3,18 @@
 exports[`Testing the Menu component renders without crashing 1`] = `
 <styled.div>
   <styled.div>
-    Meme created by
-    <styled.div>
-      @username123
-    </styled.div>
-  </styled.div>
-  <styled.div>
     Meme wall created by
     <styled.div>
-      @username123
+      <Link
+        replace={false}
+        to="users/"
+      >
+        @username123
+      </Link>
     </styled.div>
   </styled.div>
   <styled.div>
     Flag meme
-  </styled.div>
-  <styled.div>
-    Mute meme
-  </styled.div>
-  <styled.div>
-    Mute meme
-  </styled.div>
-  <styled.div>
-    Mute player
-  </styled.div>
-  <styled.div>
-    Add meme to wall
-  </styled.div>
-  <styled.div>
-    Invite player to wall
   </styled.div>
   <styled.div>
     View player profile
