@@ -24,7 +24,28 @@ exports[`Testing the Root component renders without crashing 1`] = `
   }
 >
   <styled.div>
-    <Connect(Routes) />
+    <GlobalStyleComponent />
+    <Connect(Header) />
+    <Switch>
+      <Route
+        component={[Function]}
+        exact={true}
+        path="/"
+      />
+      <Route
+        component={[Function]}
+        exact={true}
+        path="/login"
+      />
+      <Route
+        component={[Function]}
+        exact={true}
+        path="/auth/:provider"
+      />
+      <Route
+        component={[Function]}
+      />
+    </Switch>
   </styled.div>
 </Connect(ConnectedRouterWithContext)>
 `;

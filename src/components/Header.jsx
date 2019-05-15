@@ -4,19 +4,22 @@ import styled from 'styled-components';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import { push } from 'connected-react-router';
 
 import { calculateRem, mobileWidth } from 'styles';
 import { ShareButton, Discover, Ellipsis, Create } from 'components/Icons';
 import { white } from 'styles/colors';
 import { showModal } from 'actions/modal';
+import { savePathFrom } from 'actions/auth';
 import toggleMenu from 'actions/menu';
 
 export class Header extends Component {
   share = () => {
-    const { isLoggedIn, actions } = this.props;
-    if (!isLoggedIn) {
-      return actions.showModal('auth');
+    const { authenticated, actions, location, history } = this.props;
+    if (!authenticated) {
+      const { pathname } = location;
+      actions.savePathFrom(pathname);
+      return history.push('/login');
     }
     return actions.showModal('share');
   };
@@ -97,18 +100,18 @@ const NavRight = styled(NavSection)`
   justify-content: flex-end;
 `;
 
-Header.propTypes = {
-  isLoggedIn: PropTypes.bool.isRequired,
-  actions: PropTypes.shape({}).isRequired,
-};
-
 const mapStateToProps = state => ({
+  location: state.router.location,
   menuStatus: state.menu.show,
-  isLoggedIn: state.auth.isLoggedIn,
+  authenticated: state.auth.authenticated,
 });
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators({ showModal, toggleMenu }, dispatch),
+  actions: bindActionCreators(
+    { showModal, toggleMenu, savePathFrom, push },
+    dispatch
+  ),
+  push,
 });
 
 export default connect(

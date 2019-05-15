@@ -1,5 +1,5 @@
 import { REMOVE_IMAGE, SELECT_IMAGE } from 'constants/actionTypes';
-import defaultImage from 'assets/images/dank.png';
+import defaultImage from 'assets/images/create-meme.svg';
 
 const initialState = {
   imageUrl: defaultImage,

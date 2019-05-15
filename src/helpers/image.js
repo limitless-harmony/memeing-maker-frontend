@@ -15,8 +15,8 @@ export const createImage = async src => {
 
 export const getCroppedImage = (image, cropArea) => {
   const canvas = document.createElement('canvas');
-  canvas.width = 400;
-  canvas.height = 400;
+  canvas.width = cropArea.width;
+  canvas.height = cropArea.height;
   const ctx = canvas.getContext('2d');
   ctx.drawImage(
     image,
@@ -26,8 +26,8 @@ export const getCroppedImage = (image, cropArea) => {
     cropArea.height,
     0,
     0,
-    400,
-    400
+    cropArea.width,
+    cropArea.height
   );
   const base64 = getBase64Image(canvas);
   return base64;

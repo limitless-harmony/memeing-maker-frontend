@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
+import { hideModal } from 'actions/modal';
 import { calculateRem } from 'styles';
 import {
   FacebookColored,
@@ -8,46 +11,35 @@ import {
   LinkedinColored,
 } from 'components/Icons';
 
-class Authentication extends Component {
+class Login extends Component {
   handleLogin = strategy => {
-    console.log(strategy);
-  };
-
-  loginWithGoogle = () => {
-    return this.handleLogin('google');
-  };
-
-  loginWithFacebook = () => {
-    return this.handleLogin('facebook');
-  };
-
-  loginWithLinkedIn = () => {
-    return this.handleLogin('linkedIn');
+    const { history } = this.props;
+    return history.push(`/auth/${strategy}`);
   };
 
   render() {
     return (
-      <StyledAuthentication>
+      <StyledLogin>
         <TextSection>Sign up or log in</TextSection>
         <TextSection>to create, share, & discover</TextSection>
         <TextSection> our full library of meaningful memes.</TextSection>
         <ButtonSection>
-          <Button onClick={this.loginWithGoogle}>
+          <Button onClick={() => this.handleLogin('google')}>
             <GoogleColored />
           </Button>
-          <Button onClick={this.loginWithFacebook}>
+          <Button onClick={() => this.handleLogin('facebook')}>
             <FacebookColored />
           </Button>
-          <Button onClick={this.loginWithLinkedIn}>
+          <Button onClick={() => this.handleLogin('linkedin')}>
             <LinkedinColored />
           </Button>
         </ButtonSection>
-      </StyledAuthentication>
+      </StyledLogin>
     );
   }
 }
 
-const StyledAuthentication = styled.div`
+const StyledLogin = styled.div`
   margin: ${calculateRem(-70)} auto auto;
   display: flex;
   flex-direction: column;
@@ -71,7 +63,15 @@ const ButtonSection = styled.div`
 `;
 
 const Button = styled.div`
+  cursor: pointer;
   margin: 0 ${calculateRem(12)};
 `;
 
-export default Authentication;
+const mapDispatchToProps = dispatch => ({
+  actions: bindActionCreators({ hideModal }, dispatch),
+});
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(Login);

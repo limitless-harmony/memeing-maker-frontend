@@ -22,6 +22,7 @@ exports[`Testing the MemeCard component renders without crashing 1`] = `
       height="100%"
       width="100%"
       x="0"
+      xlinkHref="/static/media/create-meme.bf0fa792.svg"
       y="0"
     />
   </svg>

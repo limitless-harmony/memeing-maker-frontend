@@ -6,7 +6,7 @@ import MemeText from 'components/MemeText';
 const MemePreview = ({ image, topText, bottomText, onImageClick }) => (
   <Fragment>
     <StyledPreview>
-      <MemeText text={topText} />
+      <MemeText text={topText} square />
       <svg
         onClick={onImageClick}
         style={{ display: 'block' }}
@@ -18,7 +18,7 @@ const MemePreview = ({ image, topText, bottomText, onImageClick }) => (
       >
         <image x="0" y="0" xlinkHref={image} width="100%" height="100%" />
       </svg>
-      <MemeText text={bottomText} />
+      <MemeText text={bottomText} square />
     </StyledPreview>
   </Fragment>
 );

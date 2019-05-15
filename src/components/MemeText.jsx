@@ -58,7 +58,8 @@ const StyledText = styled.div`
     align-items: center;
     text-align: center;
     font-weight: 900;
-    font-size: ${({ text, small }) => calculateRem(setFontSize(text, small))};
+    font-size: ${({ text, small }) =>
+      text ? calculateRem(setFontSize(text, small)) : calculateRem(16)};
   }
 `;
 
