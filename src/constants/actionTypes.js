@@ -9,4 +9,7 @@ export const LOG_OUT = 'LOG_OUT';
 export const SELECT_IMAGE = 'SELECT_IMAGE';
 export const REMOVE_IMAGE = 'REMOVE_IMAGE';
 export const SET_MEMES = 'SET_MEMES';
+export const SET_A_MEME = 'SET_A_MEME';
+export const SET_WALLS = 'SET_WALLS';
+export const SET_A_WALL = 'SET_A_WALL';
 export const SET_FEATURED_MEMES = 'SET_FEATURED_MEMES';

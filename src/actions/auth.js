@@ -1,6 +1,7 @@
 import { USER_LOGGED_IN, LOG_OUT, SET_PATH_FROM } from 'constants/actionTypes';
-import { startLoader, stopLoader } from 'actions/loading';
+import { startLoader, stopLoader } from 'actions/common';
 import api from 'services/api';
+import { setAuthToken } from 'helpers/auth';
 
 const setPathFrom = path => {
   return {
@@ -26,7 +27,9 @@ export const login = (accessToken, provider) => async dispatch => {
     const url = `auth/${provider}/success?code=${accessToken}`;
     const response = await api.get(url);
     const { data } = response.data;
-    return dispatch(setUser(data));
+    const { token, ...user } = data;
+    await setAuthToken(token);
+    return dispatch(setUser(user));
   } catch (error) {
     return console.error(error);
   } finally {

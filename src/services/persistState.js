@@ -1,10 +1,12 @@
+import storage from 'helpers/storage';
+
 /**
- * @description Loads the state from localStorage. If no state is found,
+ * @description Loads the state from  If no state is found,
  * return undefined so that reducers can instantiate the state.
  */
 export const loadState = () => {
   try {
-    const serializedState = localStorage.getItem('state');
+    const serializedState = storage.getItem('state');
     if (serializedState === null || serializedState === 'undefined')
       return undefined;
     const state = JSON.parse(serializedState);
@@ -21,15 +23,8 @@ export const loadState = () => {
 export const saveState = state => {
   try {
     const serializedState = JSON.stringify(state);
-    return localStorage.setItem('state', serializedState);
+    return storage.setItem('state', serializedState);
   } catch (error) {
     return null;
   }
-};
-
-/**
- * @description clears everything in the localStorage
- */
-export const clearState = () => {
-  localStorage.clear();
 };

@@ -1,4 +1,5 @@
 import { USER_LOGGED_IN, LOG_OUT, SET_PATH_FROM } from 'constants/actionTypes';
+import storage from 'helpers/storage';
 
 const initialState = {
   authenticated: false,
@@ -20,6 +21,7 @@ const auth = (state = initialState, { type, user, path }) => {
         previous: path,
       };
     case LOG_OUT:
+      storage.clear();
       return {
         ...state,
         authenticated: false,

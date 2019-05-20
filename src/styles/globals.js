@@ -2,7 +2,7 @@ import styledNormalize from 'styled-normalize';
 import { createGlobalStyle } from 'styled-components';
 
 import { white, black } from 'styles/colors';
-import { baseSize, calculateRem } from 'styles';
+import { baseSize } from 'styles';
 
 const globalStyles = createGlobalStyle`
   ${styledNormalize}
@@ -15,14 +15,13 @@ const globalStyles = createGlobalStyle`
   body {
     background-color: ${white};
     margin: 0 auto;
-    padding: ${calculateRem(36)} 0 0;
     color: ${black};
     font-size: ${baseSize}px;
     font-family: 'Lucida grande';
     min-height: 100%;
     position:relative;
   }
-  
+
   #root {
     display: flex;
     min-height: 100%;

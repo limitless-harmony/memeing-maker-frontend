@@ -5,11 +5,16 @@ import { connect } from 'react-redux';
 
 import { calculateRem } from 'styles';
 import getShareLink from 'helpers/getShareLink';
-import { hideModal } from 'actions/modal';
+import { hideModal } from 'actions/common';
 
 export class ShareButton extends PureComponent {
   getPath = pathname => {
-    if (pathname === '/' || !pathname.includes('meme')) return '';
+    if (
+      pathname === '/' ||
+      !pathname.includes('/meme') ||
+      !pathname.includes('/wall')
+    )
+      return '';
     return pathname;
   };
 

@@ -12,14 +12,14 @@ exports[`Testing the CreateMeme page component renders without crashing 1`] = `
   <Input
     name="topText"
     onChange={[Function]}
-    placeholder="Click to enter top text"
+    placeholder="Enter top text"
     underline={true}
     value=""
   />
   <Input
     name="bottomText"
     onChange={[Function]}
-    placeholder="Click to enter bottom text"
+    placeholder="Enter bottom text"
     underline={true}
     value=""
   />

@@ -12,8 +12,24 @@ export const camelize = string => {
   return capitalized.join('');
 };
 
+const parseId = object => {
+  const { _id, ...others } = object;
+  others.id = _id;
+  return others;
+};
+
+export const parseResponse = response => {
+  if (Array.isArray(response)) {
+    const result = response.map(obj => {
+      return parseId(obj);
+    });
+    return result;
+  }
+  return parseId(response);
+};
+
 // constants
 export const name = 'Memeing Maker';
 export const tagline = 'Make meaning. Share memes.';
 export const orgName = 'Limitless Harmony';
-export const loadingText = 'Meaning Loading...';
+export const loadingText = 'Meaning Loading';

@@ -15,7 +15,7 @@ export const App = ({ history, showMenu, loading, showModal, modalId }) => {
   return (
     <ConnectedRouter history={history}>
       <MainContainer>
-        {showMenu && <OverlayMenu />}
+        {showMenu && <OverlayMenu history={history} />}
         {loading && <Loading />}
         {routes}
         {showModal && (
@@ -34,17 +34,17 @@ const MainContainer = styled.div`
   flex-direction: column;
   margin: 0 auto;
   font-size: inherit;
-  padding: ${calculateRem(17)} ${calculateRem(14)};
+  padding: ${calculateRem(36)} ${calculateRem(14)};
   width: 100%;
   max-width: ${calculateRem(mobileWidth)};
   box-sizing: border-box;
 `;
 
 const mapStateToProps = state => ({
-  showModal: state.modal.show,
-  showMenu: state.menu.show,
-  modalId: state.modal.id,
-  loading: state.loading.status,
+  showModal: state.common.showModal,
+  showMenu: state.common.showMenu,
+  modalId: state.common.modalId,
+  loading: state.common.loading,
 });
 
 export default connect(mapStateToProps)(App);

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { hideModal } from 'actions/modal';
+import { hideModal } from 'actions/common';
 import { white, buttonBorder } from 'styles/colors';
 import { calculateRem, mobileWidth } from 'styles';
 
