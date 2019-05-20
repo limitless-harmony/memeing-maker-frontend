@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
@@ -16,6 +15,11 @@ export class Featured extends Component {
     await actions.getFeatured();
   }
 
+  login = () => {
+    const { history } = this.props;
+    return history.push('/login');
+  };
+
   render() {
     const { memes } = this.props;
     return (
@@ -25,8 +29,7 @@ export class Featured extends Component {
             <SectionHeading>This Week’s Featured Memes</SectionHeading>
             <Container>
               {memes.map(meme => (
-                // eslint-disable-next-line no-underscore-dangle
-                <Meme key={meme._id}>
+                <Meme key={meme.id}>
                   <MemeCard
                     small
                     src={meme.image}
@@ -36,8 +39,8 @@ export class Featured extends Component {
                 </Meme>
               ))}
             </Container>
-            <Button color={buttonBorder} outline rounded>
-              <ButtonText to="/login">More</ButtonText>
+            <Button color={buttonBorder} outline rounded onClick={this.login}>
+              <ButtonText>More</ButtonText>
             </Button>
           </>
         ) : (
@@ -76,7 +79,7 @@ const SectionHeading = styled.div`
   margin: ${calculateRem(16)} auto;
 `;
 
-const ButtonText = styled(Link)`
+const ButtonText = styled.div`
   color: ${black};
   text-decoration: none;
 `;

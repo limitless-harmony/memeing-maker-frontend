@@ -1,12 +1,17 @@
-import { SET_MEMES, SET_FEATURED_MEMES } from 'constants/actionTypes';
+import {
+  SET_MEMES,
+  SET_FEATURED_MEMES,
+  SET_A_MEME,
+} from 'constants/actionTypes';
 
 const initialState = {
   meta: {},
   memes: [],
   featured: [],
+  current: null,
 };
 
-const meme = (state = initialState, { type, memes, meta }) => {
+const meme = (state = initialState, { type, memes, meta, current }) => {
   switch (type) {
     case SET_MEMES:
       return {
@@ -18,6 +23,11 @@ const meme = (state = initialState, { type, memes, meta }) => {
       return {
         ...state,
         featured: memes,
+      };
+    case SET_A_MEME:
+      return {
+        ...state,
+        current,
       };
     default:
       return state;

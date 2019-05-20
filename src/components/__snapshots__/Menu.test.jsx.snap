@@ -3,30 +3,15 @@
 exports[`Testing the Menu component renders without crashing 1`] = `
 <styled.div>
   <styled.div>
-    Meme wall created by
-    <styled.div>
-      <Link
-        replace={false}
-        to="users/"
-      >
-        @username123
-      </Link>
-    </styled.div>
-  </styled.div>
-  <styled.div>
-    Flag meme
-  </styled.div>
-  <styled.div>
-    View player profile
-  </styled.div>
-  <styled.div>
     View your profile
   </styled.div>
   <styled.div>
     View rules of play
   </styled.div>
-  <styled.div>
-    Log out
+  <styled.div
+    onClick={[Function]}
+  >
+    Login
   </styled.div>
 </styled.div>
 `;

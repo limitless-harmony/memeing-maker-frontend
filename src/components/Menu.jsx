@@ -2,12 +2,28 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
 
 import { calculateRem, mobileWidth } from 'styles';
 import { white, dark } from 'styles/colors';
+import toggleMenu from 'actions/menu';
+import { logout } from 'actions/auth';
 
 export class Menu extends Component {
   handleClick = () => {};
+
+  logout = () => {
+    const { actions, history } = this.props;
+    actions.logout();
+    actions.toggleMenu();
+    history.push('/');
+  };
+
+  login = () => {
+    const { actions, history } = this.props;
+    actions.toggleMenu();
+    history.push('/login');
+  };
 
   isPage = page => {
     const {
@@ -17,28 +33,37 @@ export class Menu extends Component {
   };
 
   render() {
-    const { meme, wall } = this.props;
+    const { meme, wall, authenticated } = this.props;
     return (
       <StyledMenu>
         {meme && (
+          <>
+            <MenuItem>
+              Meme created by
+              <Inlet>
+                <Link to={`/users/${meme.creator.id}`}>
+                  @{meme.creator.name}
+                </Link>
+              </Inlet>
+            </MenuItem>
+            <MenuItem>Flag meme</MenuItem>
+          </>
+        )}
+        {wall && (
           <MenuItem>
-            Meme created by
+            Meme wall created by
             <Inlet>
-              <Link to={`/users/${meme.user.id}`}>@username123</Link>
+              <Link to={`/users/${wall.creator.id}`}>@{wall.creator.name}</Link>
             </Inlet>
           </MenuItem>
         )}
-        <MenuItem>
-          Meme wall created by
-          <Inlet>
-            <Link to="users/">@username123</Link>
-          </Inlet>
-        </MenuItem>
-        <MenuItem>Flag meme</MenuItem>
-        <MenuItem>View player profile</MenuItem>
         <MenuItem>View your profile</MenuItem>
         <MenuItem>View rules of play</MenuItem>
-        <MenuItem>Log out</MenuItem>
+        {authenticated ? (
+          <MenuItem onClick={this.logout}>Log out</MenuItem>
+        ) : (
+          <MenuItem onClick={this.login}>Login</MenuItem>
+        )}
       </StyledMenu>
     );
   }
@@ -73,8 +98,17 @@ const Inlet = styled.div`
   box-sizing: border-box;
 `;
 
-const mapStateToProps = state => ({
-  location: state.router.location,
+const mapDispatchToProps = dispatch => ({
+  actions: bindActionCreators({ logout, toggleMenu }, dispatch),
 });
 
-export default connect(mapStateToProps)(Menu);
+const mapStateToProps = state => ({
+  meme: state.meme.current,
+  location: state.router.location,
+  authenticated: state.auth.authenticated,
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Menu);

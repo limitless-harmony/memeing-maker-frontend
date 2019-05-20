@@ -3,9 +3,12 @@ import styled from 'styled-components';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { hideModal } from 'actions/modal';
-import { selectImage } from 'actions/image';
-import { startLoader, stopLoader } from 'actions/loading';
+import {
+  hideModal,
+  selectImage,
+  startLoader,
+  stopLoader,
+} from 'actions/common';
 import { calculateRem } from 'styles';
 import CropImage from 'components/CropImage';
 import Button from 'components/Button';

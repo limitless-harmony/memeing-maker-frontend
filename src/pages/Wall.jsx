@@ -1,45 +1,79 @@
-import React from 'react';
-import MemeContainer from 'components/MemeContainer';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import styled from 'styled-components';
 
+import { getAWall, getWalls } from 'actions/wall';
+import WallContainer from 'components/WallContainer';
+import Wall from 'components/Wall';
 import { calculateRem } from 'styles';
-import { tagline } from 'helpers';
-import { dark } from 'styles/colors';
 
-const MemeWall = ({ wall }) => {
-  return (
-    <Container>
-      <Tagline>{tagline}</Tagline>
-      <WallTitle>{wall.name}</WallTitle>
-      <MemeContainer memes={wall.memes} />
-    </Container>
-  );
-};
+export class MemeWall extends Component {
+  async componentDidMount() {
+    const { match } = this.props;
+    const {
+      params: { id },
+    } = match;
+    this.fetchData(id);
+  }
 
-export const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: ${calculateRem(18)} auto ${calculateRem(40)};
-  width: 100%;
-`;
+  componentDidUpdate(prevProps) {
+    const {
+      match: { params },
+    } = prevProps;
+    const {
+      match: {
+        params: { id },
+      },
+    } = this.props;
+    if (id !== params.id) {
+      this.fetchAWall(id);
+    }
+  }
 
-const WallTitle = styled.div`
-  margin: ${calculateRem(5)} auto ${calculateRem(50)};
-  padding: ${calculateRem(14)} ${calculateRem(25)};
-  border: ${calculateRem(3)} solid ${dark};
-  border-radius: ${calculateRem(7)};
-  box-sizing: border-box;
-  box-shadow: ${calculateRem(2)} ${calculateRem(4)} ${calculateRem(4)} 0 ${dark};
+  fetchAWall = async wallId => {
+    const { actions } = this.props;
+    await actions.getAWall(wallId);
+  };
+
+  fetchAllWalls = async () => {
+    const { actions } = this.props;
+    await actions.getWalls();
+  };
+
+  fetchData = async id => {
+    await this.fetchAWall(id);
+    await this.fetchAllWalls();
+  };
+
+  render() {
+    const { wall, walls, history } = this.props;
+    return (
+      <>
+        <Wall wall={wall} />
+        <MoreWalls>More Meme Walls</MoreWalls>
+        <WallContainer walls={walls} history={history} />
+      </>
+    );
+  }
+}
+
+const MoreWalls = styled.div`
+  margin: 0 0 ${calculateRem(10)};
+  font-size: ${calculateRem(18)};
   text-align: center;
-  font-size: ${calculateRem(23)};
-  line-height: ${calculateRem(27)};
-  width: 80%;
 `;
 
-const Tagline = styled.div`
-  margin: 0 auto;
-`;
+const mapStateToProps = state => ({
+  wall: state.wall.current,
+  walls: state.wall.walls,
+});
 
-export default MemeWall;
+const mapDispatchToProps = dispatch => ({
+  actions: bindActionCreators({ getAWall, getWalls }, dispatch),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MemeWall);

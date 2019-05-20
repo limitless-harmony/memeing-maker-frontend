@@ -2,14 +2,12 @@
 
 exports[`Testing the Featured page component renders without crashing 1`] = `
 <styled.div>
-  <styled.div>
-    Make meaning. Share memes.
-  </styled.div>
+  <Tagline />
   <styled.div>
     Example wall
   </styled.div>
-  <MemeContainer
-    memes={Array []}
-  />
+  <styled.div>
+    No meme available in this wall yet!
+  </styled.div>
 </styled.div>
 `;

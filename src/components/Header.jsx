@@ -4,12 +4,11 @@ import styled from 'styled-components';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { push } from 'connected-react-router';
 
 import { calculateRem, mobileWidth } from 'styles';
 import { ShareButton, Discover, Ellipsis, Create } from 'components/Icons';
 import { white } from 'styles/colors';
-import { showModal } from 'actions/modal';
+import { showModal } from 'actions/common';
 import { savePathFrom } from 'actions/auth';
 import toggleMenu from 'actions/menu';
 
@@ -25,8 +24,8 @@ export class Header extends Component {
   };
 
   toggleMenu = () => {
-    const { actions, menuStatus } = this.props;
-    return actions.toggleMenu(!menuStatus);
+    const { actions } = this.props;
+    return actions.toggleMenu();
   };
 
   render() {
@@ -102,16 +101,14 @@ const NavRight = styled(NavSection)`
 
 const mapStateToProps = state => ({
   location: state.router.location,
-  menuStatus: state.menu.show,
   authenticated: state.auth.authenticated,
 });
 
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(
-    { showModal, toggleMenu, savePathFrom, push },
+    { showModal, toggleMenu, savePathFrom },
     dispatch
   ),
-  push,
 });
 
 export default connect(

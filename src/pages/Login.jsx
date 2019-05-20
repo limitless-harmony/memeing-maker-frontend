@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
 
-import { hideModal } from 'actions/modal';
 import { calculateRem } from 'styles';
 import {
   FacebookColored,
@@ -67,11 +64,4 @@ const Button = styled.div`
   margin: 0 ${calculateRem(12)};
 `;
 
-const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators({ hideModal }, dispatch),
-});
-
-export default connect(
-  null,
-  mapDispatchToProps
-)(Login);
+export default Login;

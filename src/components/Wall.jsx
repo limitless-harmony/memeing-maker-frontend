@@ -1,22 +1,30 @@
 import React from 'react';
-import MemeContainer from 'components/MemeContainer';
 import styled from 'styled-components';
 
 import { calculateRem } from 'styles';
-import { tagline } from 'helpers';
 import { dark } from 'styles/colors';
+import MemeContainer from 'components/MemeContainer';
+import Tagline from 'components/Tagline';
 
 const MemeWall = ({ wall }) => {
   return (
     <Container>
-      <Tagline>{tagline}</Tagline>
-      <WallTitle>{wall.name}</WallTitle>
-      <MemeContainer memes={wall.memes} />
+      <Tagline />
+      {wall && (
+        <>
+          <WallTitle>{wall.name}</WallTitle>
+          {wall.memes.length ? (
+            <MemeContainer memes={wall.memes} />
+          ) : (
+            <SectionHeading>No meme available in this wall yet!</SectionHeading>
+          )}
+        </>
+      )}
     </Container>
   );
 };
 
-export const Container = styled.div`
+const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -38,8 +46,8 @@ const WallTitle = styled.div`
   width: 80%;
 `;
 
-const Tagline = styled.div`
-  margin: 0 auto;
+const SectionHeading = styled.div`
+  font-size: ${calculateRem(18)};
+  margin: ${calculateRem(16)} auto;
 `;
-
 export default MemeWall;

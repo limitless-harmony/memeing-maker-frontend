@@ -3,9 +3,8 @@ import styled from 'styled-components';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { selectImage } from 'actions/image';
+import { selectImage, showModal } from 'actions/common';
 import { create } from 'actions/meme';
-import { showModal } from 'actions/modal';
 import Input from 'components/Input';
 import { GoArrow } from 'components/Icons';
 import MemePreview from 'components/MemePreview';
@@ -76,14 +75,14 @@ export class CreateMeme extends Component {
           name="topText"
           underline
           onChange={this.changeText}
-          placeholder="Click to enter top text"
+          placeholder="Enter top text"
         />
         <Input
           value={bottomText}
           name="bottomText"
           onChange={this.changeText}
           underline
-          placeholder="Click to enter bottom text"
+          placeholder="Enter bottom text"
         />
         <ButtonContainer>
           Post to
@@ -120,7 +119,8 @@ export const SubmitMeme = styled.button`
 `;
 
 const mapStateToProps = state => ({
-  selectedImage: state.image.imageUrl,
+  selectedImage: state.common.imageUrl,
+  user: state.auth.user,
 });
 
 const mapDispatchToProps = dispatch => ({

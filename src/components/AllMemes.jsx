@@ -9,13 +9,13 @@ import MemeContainer from 'components/MemeContainer';
 
 export class AllMemes extends Component {
   componentDidMount() {
-    this.fetchMemes();
+    const { meta } = this.props;
+    if (!meta.hasPrevPage) this.fetchMemes();
   }
 
   fetchMemes = async () => {
     const { actions, meta } = this.props;
-    const { nextPage } = meta;
-    await actions.getMemes(nextPage || 1);
+    await actions.getMemes(meta.nextPage || 1);
   };
 
   render() {

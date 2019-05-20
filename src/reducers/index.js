@@ -1,22 +1,18 @@
 import { combineReducers } from 'redux';
 import { connectRouter } from 'connected-react-router';
 
-import modal from 'reducers/modal';
-import menu from 'reducers/menu';
 import meme from 'reducers/meme';
+import wall from 'reducers/wall';
 import auth from 'reducers/auth';
-import image from 'reducers/image';
-import loading from 'reducers/loading';
+import common from 'reducers/common';
 
 const rootReducer = history =>
   combineReducers({
-    router: connectRouter(history),
-    meme,
-    menu,
-    modal,
     auth,
-    image,
-    loading,
+    meme,
+    wall,
+    common,
+    router: connectRouter(history),
   });
 
 export default rootReducer;

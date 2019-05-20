@@ -1,42 +1,79 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-import meme from 'assets/memes/meme.png';
 import { calculateRem } from 'styles';
+import { getAMeme, reactToMeme } from 'actions/meme';
 import MemeCard from 'components/MemeCard';
-import { Container } from 'pages/Wall';
-import { ThanksReaction } from 'components/Icons';
-import { black } from 'styles/colors';
+import Reaction from 'components/Reaction';
 
-const Single = () => (
-  <Container>
-    <MemeCard square src={meme} />
-    <ReactionContainer>
-      <ThanksReaction />
-    </ReactionContainer>
-    <ReactionCount>200</ReactionCount>
-  </Container>
-);
+export class Single extends Component {
+  async componentDidMount() {
+    const { match } = this.props;
+    const {
+      params: { id },
+    } = match;
+    this.fetchData(id);
+  }
 
-const ReactionContainer = styled.div`
+  componentDidUpdate(prevProps) {
+    const {
+      match: { params },
+    } = prevProps;
+    const {
+      match: {
+        params: { id },
+      },
+    } = this.props;
+    if (id !== params.id) {
+      this.fetchData(id);
+    }
+  }
+
+  fetchData = async wallId => {
+    const { actions } = this.props;
+    await actions.getAMeme(wallId);
+  };
+
+  render() {
+    const { meme, actions } = this.props;
+    return (
+      <Container>
+        {meme ? (
+          <>
+            <MemeCard
+              square
+              src={meme.image}
+              topText={meme.topText}
+              bottomText={meme.bottomText}
+            />
+            <Reaction meme={meme} reactToMeme={actions.reactToMeme} />
+          </>
+        ) : null}
+      </Container>
+    );
+  }
+}
+
+const Container = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: ${calculateRem(6)} ${calculateRem(10)};
-  border: 2px solid ${black};
-  border-radius: 50%;
-  box-sizing: border-box;
-  width: ${calculateRem(53)};
-  height: ${calculateRem(53)};
-
-  svg,
-  img {
-    display: block;
-  }
-`;
-const ReactionCount = styled.div`
-  font-size: ${calculateRem(11)};
-  line-height: ${calculateRem(13)};
+  margin: 0 auto ${calculateRem(6)};
+  width: 100%;
 `;
 
-export default Single;
+const mapStateToProps = state => ({
+  meme: state.meme.current,
+});
+
+const mapDispatchToProps = dispatch => ({
+  actions: bindActionCreators({ getAMeme, reactToMeme }, dispatch),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Single);

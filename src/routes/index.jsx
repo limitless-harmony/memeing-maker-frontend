@@ -4,6 +4,7 @@ import { Switch, Route } from 'react-router-dom';
 import Home from 'pages/Home';
 import LoginPage from 'pages/Login';
 import AuthPage from 'pages/Authentication';
+import Reaction from 'components/Reaction';
 
 import GlobalStyles from 'styles/globals';
 import AuthRoutes from 'routes/Auth';
@@ -18,6 +19,7 @@ const routes = (
       <Route exact path="/" component={Home} />
       <Route exact path="/login" component={LoginPage} />
       <Route exact path="/auth/:provider" component={AuthPage} />
+      <Route exact path="/react" component={Reaction} />
       <Route component={AuthRoutes} />
     </Switch>
   </>

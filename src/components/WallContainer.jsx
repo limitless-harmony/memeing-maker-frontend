@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 import { calculateRem } from 'styles';
-import MemeCard from 'components/MemeCard';
+import { dark } from 'styles/colors';
 
-class MemeContainer extends Component {
+class WallContainer extends Component {
   state = {
     prevY: 0,
   };
@@ -20,6 +20,11 @@ class MemeContainer extends Component {
     this.observer.observe(this.loadingRef);
   }
 
+  loadWall = wallId => {
+    const { history } = this.props;
+    return history.push(`/walls/${wallId}`);
+  };
+
   handleObserver = entities => {
     const { prevY } = this.state;
     const { fetchMore, hasNextPage } = this.props;
@@ -32,19 +37,14 @@ class MemeContainer extends Component {
   };
 
   render() {
-    const { memes } = this.props;
+    const { walls } = this.props;
     return (
-      <div>
+      <>
         <Container>
-          {memes.map(meme => (
-            <Meme key={meme.id} to={`memes/${meme.id}`}>
-              <MemeCard
-                small
-                src={meme.image}
-                topText={meme.topText}
-                bottomText={meme.bottomText}
-              />
-            </Meme>
+          {walls.map(wall => (
+            <WallCard key={wall.id}>
+              <Wall to={`/walls/${wall.id}`}>{wall.name}</Wall>
+            </WallCard>
           ))}
         </Container>
         <LoadMore
@@ -52,7 +52,7 @@ class MemeContainer extends Component {
             this.loadingRef = loadingRef;
           }}
         />
-      </div>
+      </>
     );
   }
 }
@@ -67,12 +67,31 @@ const Container = styled.div`
   text-align: center;
 `;
 
-const Meme = styled(Link)`
-  width: 48.5%;
+const Wall = styled(Link)`
+  vertical-align: middle;
+  font-size: ${calculateRem(15)};
+  line-height: ${calculateRem(18)};
+  color: inherit;
+  text-decoration: none;
+`;
+
+const WallCard = styled.div`
+  display: flex;
+  align-items: center;
+  margin: 0 auto ${calculateRem(20)};
+  padding: ${calculateRem(8)};
+  border: ${calculateRem(2)} solid ${dark};
+  border-radius: ${calculateRem(7)};
+  box-sizing: border-box;
+  box-shadow: ${calculateRem(2)} ${calculateRem(4)} ${calculateRem(4)} 0 ${dark};
+  text-align: center;
+  cursor: pointer;
+  width: ${calculateRem(100)};
+  height: ${calculateRem(100)};
 `;
 
 const LoadMore = styled.div`
   min-height: ${calculateRem(10)};
 `;
 
-export default MemeContainer;
+export default WallContainer;
