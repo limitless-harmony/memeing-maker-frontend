@@ -41,12 +41,27 @@ export const create = meme => async dispatch => {
     dispatch(stopLoader());
   }
 };
-export const getAMeme = id => async dispatch => {
+
+export const edit = (meme, id) => async dispatch => {
+  try {
+    dispatch(startLoader());
+    const response = await api.put(`/memes/${id}/edit`, meme);
+    const { data } = response.data;
+    const newMeme = parseResponse(data);
+    return dispatch(setMemes([newMeme]));
+  } catch (error) {
+    return console.error(error);
+  } finally {
+    dispatch(stopLoader());
+  }
+};
+export const getOne = id => async dispatch => {
   try {
     dispatch(startLoader());
     const response = await api.get(`/memes/${id}`);
     const { data } = response.data;
     const meme = parseResponse(data);
+    meme.creator = parseResponse(meme.creator);
     return dispatch(setCurrentMeme(meme));
   } catch (error) {
     return console.error(error);
@@ -67,7 +82,7 @@ export const getFeatured = () => async dispatch => {
     dispatch(stopLoader());
   }
 };
-export const getMemes = page => async dispatch => {
+export const getMany = page => async dispatch => {
   try {
     dispatch(startLoader());
     const response = await api.get(`/memes?page=${page}`);

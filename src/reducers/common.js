@@ -7,10 +7,9 @@ import {
   SHOW_MODAL,
   HIDE_MODAL,
 } from 'constants/actionTypes';
-import defaultImage from 'assets/images/create-meme.svg';
 
 const initialState = {
-  imageUrl: defaultImage,
+  imageUrl: '',
   loading: false,
   showMenu: false,
   showModal: false,

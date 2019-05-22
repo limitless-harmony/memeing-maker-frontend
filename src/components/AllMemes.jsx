@@ -4,18 +4,17 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { calculateRem } from 'styles';
-import { getMemes } from 'actions/meme';
+import { getMany } from 'actions/meme';
 import MemeContainer from 'components/MemeContainer';
 
 export class AllMemes extends Component {
   componentDidMount() {
-    const { meta } = this.props;
-    if (!meta.hasPrevPage) this.fetchMemes();
+    this.fetchMemes();
   }
 
   fetchMemes = async () => {
     const { actions, meta } = this.props;
-    await actions.getMemes(meta.nextPage || 1);
+    await actions.getMany(meta.nextPage || 1);
   };
 
   render() {
@@ -60,7 +59,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators({ getMemes }, dispatch),
+  actions: bindActionCreators({ getMany }, dispatch),
 });
 
 export default connect(

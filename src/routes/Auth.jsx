@@ -7,6 +7,7 @@ import { savePathFrom } from 'actions/auth';
 import CreateRoute from 'pages/CreateMeme';
 import SingleMeme from 'pages/Single';
 import Wall from 'pages/Wall';
+import EditMeme from 'pages/EditMeme';
 
 export class Auth extends Component {
   componentDidMount() {
@@ -24,6 +25,7 @@ export class Auth extends Component {
       <Switch>
         <Route exact path="/create" component={CreateRoute} />
         <Route exact path="/memes/:id" component={SingleMeme} />
+        <Route exact path="/memes/:id/edit" component={EditMeme} />
         <Route exact path="/walls/:id" component={Wall} />
       </Switch>
     );

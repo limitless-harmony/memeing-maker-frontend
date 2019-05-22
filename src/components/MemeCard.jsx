@@ -5,10 +5,10 @@ import { calculateRem } from 'styles';
 import { dark } from 'styles/colors';
 import MemeText from 'components/MemeText';
 
-const MemeCard = ({ src, square, small, topText, bottomText }) => {
+const MemeCard = ({ src, square, small, topText, bottomText, onClick }) => {
   const defaultSrc = '/static/media/create-meme.bf0fa792.svg';
   return (
-    <Meme square={square}>
+    <Meme square={square} onClick={onClick}>
       <MemeText square={square} text={topText} small={small} top />
       <svg
         style={{ display: 'block' }}
@@ -33,6 +33,7 @@ const MemeCard = ({ src, square, small, topText, bottomText }) => {
 
 const Meme = styled.div`
   margin: 0 0 ${calculateRem(11)};
+  cursor: pointer;
   border-radius: ${({ square }) => (square ? 'none' : `${calculateRem(7)}`)};
   box-shadow: ${calculateRem(2)} ${calculateRem(4)} ${calculateRem(4)} 0 ${dark};
   width: 100%;
