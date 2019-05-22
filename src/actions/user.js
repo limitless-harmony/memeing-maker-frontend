@@ -1,8 +1,8 @@
+/* eslint-disable import/prefer-default-export */
 import { SET_PROFILE } from 'constants/actionTypes';
 import api from 'services/api';
 import { startLoader, stopLoader } from 'actions/common';
 import { parseResponse } from 'helpers';
-import { history } from 'store';
 
 const setProfile = user => {
   const { memes, walls, ...profile } = user;
@@ -23,18 +23,6 @@ export const getProfile = id => async dispatch => {
     profile.memes = parseResponse(profile.memes);
     profile.walls = parseResponse(profile.walls);
     return dispatch(setProfile(profile));
-  } catch (error) {
-    return console.error(error);
-  } finally {
-    dispatch(stopLoader());
-  }
-};
-
-export const flagMeme = memeId => async dispatch => {
-  try {
-    dispatch(startLoader());
-    await api.put(`/memes/${memeId}/flag`);
-    return history.push(`/memes/${memeId}`);
   } catch (error) {
     return console.error(error);
   } finally {

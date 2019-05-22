@@ -8,7 +8,7 @@ import { create } from 'actions/meme';
 import Input from 'components/Input';
 import { GoArrow } from 'components/Icons';
 import Preview from 'components/Preview';
-import { inputFill } from 'styles/colors';
+import { inputFill, dark } from 'styles/colors';
 import { calculateRem } from 'styles';
 import { name } from 'helpers';
 import defaultImage from 'assets/images/create-meme.svg';
@@ -101,12 +101,13 @@ export const ButtonContainer = styled.div`
   width: 100%;
 `;
 
-export const SubmitMeme = styled.button`
-  color: #4a4a4a;
+const SubmitMeme = styled.button`
+  color: ${dark};
   background-color: ${inputFill};
   margin: 0 ${calculateRem(14)};
   padding: ${calculateRem(6)} ${calculateRem(25)};
   border: none;
+  cursor: pointer;
   border-radius: ${calculateRem(10)};
   min-width: 60%;
   text-align: left;

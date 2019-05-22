@@ -1,59 +1,45 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import { selectImage, showModal, removeImage } from 'actions/common';
-import { edit, getOne } from 'actions/meme';
+import { edit } from 'actions/auth';
 import Input from 'components/Input';
 import { GoArrow } from 'components/Icons';
 import Preview from 'components/Preview';
-import { inputFill, dark } from 'styles/colors';
+import { inputFill, pink, dark } from 'styles/colors';
 import { calculateRem } from 'styles';
-import { name } from 'helpers';
-import defaultImage from 'assets/images/create-meme.svg';
+import defaultImage from 'assets/images/serious-cat.jpg';
 
-export class Edit extends Component {
+export class EditProfile extends Component {
   state = {
     topText: '',
     bottomText: '',
-    imageUrl: '',
+    image: '',
+    username: '',
+    error: '',
   };
 
   async componentDidMount() {
-    const { match } = this.props;
-    const {
-      params: { id },
-    } = match;
-    await this.fetchData(id);
+    const { authenticated, history, actions } = this.props;
+    if (!authenticated) {
+      const { pathname } = history.location;
+      actions.savePathFrom(pathname);
+      return history.push('/login');
+    }
+    return this.loadData();
   }
 
-  componentDidUpdate(prevProps) {
-    const {
-      match: { params },
-    } = prevProps;
-    const {
-      match: {
-        params: { id },
-      },
-    } = this.props;
-    if (id !== params.id) {
-      this.fetchData(id);
-    }
-  }
-
-  fetchData = async memeId => {
-    const { actions } = this.props;
-    await actions.getOne(memeId);
-    const { meme, user, history } = this.props;
-    if (user.id !== meme.creator.id) {
-      return history.push(`/memes/${meme.id}`);
-    }
+  loadData = async () => {
+    const { user } = this.props;
+    const { topText, bottomText, username, image } = user;
     await this.setState(() => {
       return {
-        topText: meme.topText,
-        bottomText: meme.bottomText,
-        imageUrl: meme.image || defaultImage,
+        topText,
+        bottomText,
+        image: image || defaultImage,
+        username,
       };
     });
     return this.loadImage();
@@ -66,36 +52,39 @@ export class Edit extends Component {
 
   loadImage = () => {
     const { actions } = this.props;
-    const { imageUrl } = this.state;
-    actions.selectImage(imageUrl);
+    const { image } = this.state;
+    actions.selectImage(image);
   };
 
-  editMeme = async () => {
-    const { topText, bottomText } = this.state;
-    const { actions, selectedImage, meme } = this.props;
-    await actions.edit(
-      {
-        topText,
-        bottomText,
-        image: selectedImage,
-        name: meme.name,
-      },
-      meme.id
-    );
+  editProfile = async () => {
+    const { topText, bottomText, username } = this.state;
+    const { actions, selectedImage, history, previousPath } = this.props;
+    if (!username)
+      return this.setState({ error: 'Please choose a unique username!' });
+    await actions.edit({
+      topText,
+      bottomText,
+      image: selectedImage,
+      username,
+    });
+    this.loadData();
     actions.removeImage();
+    const path = previousPath || '/';
+    return history.push(path);
   };
 
   changeText = event => {
+    if (event.currentTarget.name === 'username') this.setState({ error: '' });
     this.setState({
       [event.currentTarget.name]: event.currentTarget.value,
     });
   };
 
   render() {
-    const { topText, bottomText } = this.state;
+    const { topText, bottomText, username, error } = this.state;
     const { selectedImage } = this.props;
     return (
-      <Fragment>
+      <>
         <PreviewContainer>
           <Preview
             image={selectedImage}
@@ -104,6 +93,15 @@ export class Edit extends Component {
             onImageClick={this.selectImage}
           />
         </PreviewContainer>
+        <Input
+          value={username}
+          name="username"
+          underline
+          onChange={this.changeText}
+          placeholder="Choose a username"
+          required
+        />
+        {error && <Error>{error}</Error>}
         <Input
           value={topText}
           name="topText"
@@ -120,16 +118,24 @@ export class Edit extends Component {
         />
         <ButtonContainer>
           Post to
-          <SubmitMeme onClick={this.editMeme}>{name}</SubmitMeme>
+          <Submit onClick={this.editProfile}>Player Profile</Submit>
           <GoArrow />
         </ButtonContainer>
-      </Fragment>
+      </>
     );
   }
 }
 
 export const PreviewContainer = styled.div`
   width: 100%;
+`;
+
+const Error = styled.div`
+  width: 100%;
+  font-size: ${calculateRem(13)};
+  color: ${pink};
+  text-align: center;
+  margin: 0 auto;
 `;
 
 export const ButtonContainer = styled.div`
@@ -141,7 +147,7 @@ export const ButtonContainer = styled.div`
   width: 100%;
 `;
 
-export const SubmitMeme = styled.button`
+export const Submit = styled.button`
   color: ${dark};
   background-color: ${inputFill};
   margin: 0 ${calculateRem(14)};
@@ -150,18 +156,19 @@ export const SubmitMeme = styled.button`
   cursor: pointer;
   border-radius: ${calculateRem(10)};
   min-width: 60%;
-  text-align: left;
+  text-align: center;
 `;
 
 const mapStateToProps = state => ({
   selectedImage: state.common.imageUrl,
-  meme: state.meme.current,
+  authenticated: state.auth.authenticated,
+  previousPath: state.auth.previous,
   user: state.auth.user,
 });
 
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(
-    { showModal, selectImage, edit, getOne, removeImage },
+    { showModal, selectImage, edit, removeImage },
     dispatch
   ),
 });
@@ -169,4 +176,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Edit);
+)(EditProfile);

@@ -10,6 +10,7 @@ import GlobalStyles from 'styles/globals';
 import AuthRoutes from 'routes/Auth';
 
 import Navbar from 'components/Header';
+import EditUserProfile from 'pages/EditProfile';
 
 const routes = (
   <>
@@ -20,6 +21,7 @@ const routes = (
       <Route exact path="/login" component={LoginPage} />
       <Route exact path="/auth/:provider" component={AuthPage} />
       <Route exact path="/react" component={Reaction} />
+      <Route exact path="/edit-profile" component={EditUserProfile} />
       <Route component={AuthRoutes} />
     </Switch>
   </>

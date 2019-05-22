@@ -10,7 +10,11 @@ const Home = ({ authenticated, history }) => (
   <>
     <Tagline />
     <Title />
-    {authenticated ? <Memes /> : <FeaturedMemes history={history} />}
+    {authenticated ? (
+      <Memes history={history} />
+    ) : (
+      <FeaturedMemes history={history} />
+    )}
   </>
 );
 

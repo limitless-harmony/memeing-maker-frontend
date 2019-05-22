@@ -1,9 +1,6 @@
 import React from 'react';
 import mojs from 'mo-js';
-import styled from 'styled-components';
 
-import { dark } from 'styles/colors';
-import { calculateRem } from 'styles';
 import ReactionCard from 'components/ReactionCard';
 
 const Reaction = class extends React.Component {
@@ -118,45 +115,5 @@ const Reaction = class extends React.Component {
     );
   }
 };
-
-const ReactionButton = styled.button`
-  position: relative;
-  outline: ${calculateRem(1)} solid transparent;
-  border-radius: 50%;
-  box-shadow: ${calculateRem(2)} ${calculateRem(4)} ${calculateRem(4)} 0 ${dark};
-  background: #fff;
-  transition: border 0.1s ease-in;
-  top: 0;
-  left: 0;
-  width: ${calculateRem(53)};
-  text-align: center;
-  height: ${calculateRem(53)};
-  border: ${calculateRem(2)} solid ${dark};
-  &::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: block;
-    border-radius: 50%;
-  }
-
-  &:hover {
-    cursor: pointer;
-  }
-
-  &::after {
-    width: ${calculateRem(53)};
-    height: ${calculateRem(53)};
-    border-color: ${dark};
-    color: ${dark};
-    fill: ${dark};
-  }
-
-  &:hover,
-  &:focus {
-    border: ${calculateRem(2)} solid ${dark};
-  }
-`;
 
 export default Reaction;

@@ -1,4 +1,9 @@
-import { USER_LOGGED_IN, LOG_OUT, SET_PATH_FROM } from 'constants/actionTypes';
+import {
+  USER_LOGGED_IN,
+  LOG_OUT,
+  SET_PATH_FROM,
+  PROFILE_UPDATED,
+} from 'constants/actionTypes';
 import storage from 'helpers/storage';
 
 const initialState = {
@@ -7,7 +12,7 @@ const initialState = {
   previous: '',
 };
 
-const auth = (state = initialState, { type, user, path }) => {
+const auth = (state = initialState, { type, user, previous }) => {
   switch (type) {
     case USER_LOGGED_IN:
       return {
@@ -15,10 +20,15 @@ const auth = (state = initialState, { type, user, path }) => {
         authenticated: true,
         user,
       };
+    case PROFILE_UPDATED:
+      return {
+        ...state,
+        user,
+      };
     case SET_PATH_FROM:
       return {
         ...state,
-        previous: path,
+        previous,
       };
     case LOG_OUT:
       storage.clear();
