@@ -37,7 +37,7 @@ class MemeContainer extends Component {
       <div>
         <Container>
           {memes.map(meme => (
-            <Meme key={meme.id} to={`memes/${meme.id}`}>
+            <Meme key={meme.id} to={`/memes/${meme.id}`}>
               <MemeCard
                 small
                 src={meme.image}

@@ -8,9 +8,8 @@ import { Link } from 'react-router-dom';
 import { calculateRem, mobileWidth } from 'styles';
 import { ShareButton, Discover, Ellipsis, Create } from 'components/Icons';
 import { white } from 'styles/colors';
-import { showModal } from 'actions/common';
+import { showModal, toggleMenu } from 'actions/common';
 import { savePathFrom } from 'actions/auth';
-import toggleMenu from 'actions/menu';
 
 export class Header extends Component {
   share = () => {

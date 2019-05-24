@@ -44,6 +44,11 @@ const modal = (state = initialState, { type, imageUrl, modalId }) => {
         ...state,
         showMenu: !state.showMenu,
       };
+    case '@@router/LOCATION_CHANGE':
+      return {
+        ...state,
+        showMenu: false,
+      };
     case SHOW_MODAL:
       return {
         ...state,

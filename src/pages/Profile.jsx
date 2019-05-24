@@ -1,42 +1,99 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-import meme from 'assets/memes/meme.png';
 import { calculateRem } from 'styles';
+import { getProfile } from 'actions/user';
 import MemeCard from 'components/MemeCard';
-import { Container } from 'pages/Wall';
-import { ThanksReaction } from 'components/Icons';
-import { black } from 'styles/colors';
+import ReactionCard from 'components/ReactionCard';
+import MemeContainer from 'components/MemeContainer';
+import WallContainer from 'components/WallContainer';
 
-const Single = () => (
-  <Container>
-    <MemeCard square src={meme} />
-    <ReactionContainer>
-      <ThanksReaction />
-    </ReactionContainer>
-    <ReactionCount>200</ReactionCount>
-  </Container>
-);
+export class Profile extends Component {
+  async componentDidMount() {
+    const { match } = this.props;
+    const {
+      params: { id },
+    } = match;
+    this.fetchData(id);
+  }
 
-const ReactionContainer = styled.div`
+  componentDidUpdate(prevProps) {
+    const {
+      match: { params },
+    } = prevProps;
+    const {
+      match: {
+        params: { id },
+      },
+    } = this.props;
+    if (id !== params.id) {
+      this.fetchData(id);
+    }
+  }
+
+  fetchData = async userId => {
+    const { actions } = this.props;
+    await actions.getProfile(userId);
+  };
+
+  render() {
+    const { user, memes, walls } = this.props;
+    return (
+      <>
+        <Container>
+          {user && (
+            <>
+              <Username>@{user.username}</Username>
+              <MemeCard
+                square
+                src={user.image}
+                topText={user.topText}
+                bottomText={user.bottomText}
+              />
+              <ReactionCard total={user.reactions} />
+            </>
+          )}
+        </Container>
+        <MemeTitle>Memeing Made</MemeTitle>
+        <MemeContainer memes={memes} />
+        <WallContainer walls={walls} />
+      </>
+    );
+  }
+}
+
+const Username = styled.div`
+  font-size: ${calculateRem(25)};
+  margin: ${calculateRem(14)} auto;
+`;
+
+const MemeTitle = styled.div`
+  font-size: ${calculateRem(18)};
+  margin: ${calculateRem(19)} auto;
+`;
+
+const Container = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: ${calculateRem(6)} ${calculateRem(10)};
-  border: 2px solid ${black};
-  border-radius: 50%;
-  box-sizing: border-box;
-  width: ${calculateRem(53)};
-  height: ${calculateRem(53)};
-
-  svg,
-  img {
-    display: block;
-  }
-`;
-const ReactionCount = styled.div`
-  font-size: ${calculateRem(11)};
-  line-height: ${calculateRem(13)};
+  margin: 0 auto ${calculateRem(30)};
+  width: 100%;
 `;
 
-export default Single;
+const mapStateToProps = state => ({
+  user: state.user.profile,
+  memes: state.user.memes,
+  walls: state.user.walls,
+});
+
+const mapDispatchToProps = dispatch => ({
+  actions: bindActionCreators({ getProfile }, dispatch),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Profile);

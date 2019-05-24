@@ -13,3 +13,4 @@ export const SET_A_MEME = 'SET_A_MEME';
 export const SET_WALLS = 'SET_WALLS';
 export const SET_A_WALL = 'SET_A_WALL';
 export const SET_FEATURED_MEMES = 'SET_FEATURED_MEMES';
+export const SET_PROFILE = 'SET_PROFILE';

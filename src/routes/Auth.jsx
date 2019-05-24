@@ -8,6 +8,7 @@ import CreateRoute from 'pages/CreateMeme';
 import SingleMeme from 'pages/Single';
 import Wall from 'pages/Wall';
 import EditMeme from 'pages/EditMeme';
+import Profile from 'pages/Profile';
 
 export class Auth extends Component {
   componentDidMount() {
@@ -27,6 +28,7 @@ export class Auth extends Component {
         <Route exact path="/memes/:id" component={SingleMeme} />
         <Route exact path="/memes/:id/edit" component={EditMeme} />
         <Route exact path="/walls/:id" component={Wall} />
+        <Route exact path="/users/:id" component={Profile} />
       </Switch>
     );
   }

@@ -22,11 +22,7 @@ const auth = (state = initialState, { type, user, path }) => {
       };
     case LOG_OUT:
       storage.clear();
-      return {
-        ...state,
-        authenticated: false,
-        user: null,
-      };
+      return initialState;
     default:
       return state;
   }

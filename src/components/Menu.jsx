@@ -6,11 +6,16 @@ import { bindActionCreators } from 'redux';
 
 import { calculateRem, mobileWidth } from 'styles';
 import { white, dark } from 'styles/colors';
-import toggleMenu from 'actions/menu';
-import { logout } from 'actions/auth';
+import { flagMeme } from 'actions/meme';
+import { toggleMenu } from 'actions/common';
+import { logout, savePathFrom } from 'actions/auth';
 
 export class Menu extends Component {
-  handleClick = () => {};
+  flagMeme = () => {
+    const { actions, meme } = this.props;
+    actions.toggleMenu();
+    actions.flagMeme(meme.id);
+  };
 
   logout = () => {
     const { actions, history } = this.props;
@@ -20,7 +25,9 @@ export class Menu extends Component {
   };
 
   login = () => {
-    const { actions, history } = this.props;
+    const { actions, history, location } = this.props;
+    const { pathname } = location;
+    actions.savePathFrom(pathname);
     actions.toggleMenu();
     history.push('/login');
   };
@@ -33,23 +40,24 @@ export class Menu extends Component {
   };
 
   render() {
-    const { meme, wall, authenticated } = this.props;
+    const { meme, wall, authenticated, history } = this.props;
+    console.log(history);
     return (
       <StyledMenu>
-        {meme && (
+        {meme && this.isPage('/memes/') && (
           <>
             <MenuItem>
               Meme created by
               <Inlet>
                 <Link to={`/users/${meme.creator.id}`}>
-                  @{meme.creator.name}
+                  @{meme.creator.username}
                 </Link>
               </Inlet>
             </MenuItem>
-            <MenuItem>Flag meme</MenuItem>
+            <MenuItem onClick={this.flagMeme}>Flag meme</MenuItem>
           </>
         )}
-        {wall && (
+        {wall && this.isPage('/walls/') && (
           <MenuItem>
             Meme wall created by
             <Inlet>
@@ -99,11 +107,15 @@ const Inlet = styled.div`
 `;
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators({ logout, toggleMenu }, dispatch),
+  actions: bindActionCreators(
+    { logout, toggleMenu, savePathFrom, flagMeme },
+    dispatch
+  ),
 });
 
 const mapStateToProps = state => ({
   meme: state.meme.current,
+  wall: state.wall.current,
   location: state.router.location,
   authenticated: state.auth.authenticated,
 });

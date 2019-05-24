@@ -3,14 +3,15 @@ import styled from 'styled-components';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { selectImage, showModal } from 'actions/common';
+import { selectImage, showModal, removeImage } from 'actions/common';
 import { edit, getOne } from 'actions/meme';
 import Input from 'components/Input';
 import { GoArrow } from 'components/Icons';
-import MemePreview from 'components/MemePreview';
+import Preview from 'components/Preview';
 import { inputFill } from 'styles/colors';
 import { calculateRem } from 'styles';
 import { name } from 'helpers';
+import defaultImage from 'assets/images/create-meme.svg';
 
 export class Edit extends Component {
   state = {
@@ -52,7 +53,7 @@ export class Edit extends Component {
       return {
         topText: meme.topText,
         bottomText: meme.bottomText,
-        imageUrl: meme.image,
+        imageUrl: meme.image || defaultImage,
       };
     });
     return this.loadImage();
@@ -71,7 +72,7 @@ export class Edit extends Component {
 
   editMeme = async () => {
     const { topText, bottomText } = this.state;
-    const { actions, selectedImage, history, meme } = this.props;
+    const { actions, selectedImage, meme } = this.props;
     await actions.edit(
       {
         topText,
@@ -81,7 +82,7 @@ export class Edit extends Component {
       },
       meme.id
     );
-    history.push('/');
+    actions.removeImage();
   };
 
   changeText = event => {
@@ -96,7 +97,7 @@ export class Edit extends Component {
     return (
       <Fragment>
         <PreviewContainer>
-          <MemePreview
+          <Preview
             image={selectedImage}
             topText={topText}
             bottomText={bottomText}
@@ -159,7 +160,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(
-    { showModal, selectImage, edit, getOne },
+    { showModal, selectImage, edit, getOne, removeImage },
     dispatch
   ),
 });
