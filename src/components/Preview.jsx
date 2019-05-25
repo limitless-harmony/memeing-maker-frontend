@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import MemeText from 'components/MemeText';
 
-const MemePreview = ({ image, topText, bottomText, onImageClick }) => (
+const Preview = ({ image, topText, bottomText, onImageClick }) => (
   <Fragment>
     <StyledPreview>
       <MemeText text={topText} square />
@@ -27,4 +27,4 @@ const StyledPreview = styled.div`
   width: 100%;
 `;
 
-export default MemePreview;
+export default Preview;

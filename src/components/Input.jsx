@@ -33,9 +33,10 @@ const Input = ({
 };
 
 const Container = styled.div`
-  margin: ${calculateRem(2)} ${calculateRem(10)};
+  padding: ${calculateRem(2)} ${calculateRem(10)};
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
   align-items: center;
   width: 100%;
 `;

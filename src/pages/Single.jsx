@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { calculateRem } from 'styles';
-import { getAMeme, reactToMeme } from 'actions/meme';
+import { getOne, reactToMeme } from 'actions/meme';
 import MemeCard from 'components/MemeCard';
 import Reaction from 'components/Reaction';
 
@@ -31,9 +31,14 @@ export class Single extends Component {
     }
   }
 
-  fetchData = async wallId => {
+  fetchData = async memeId => {
     const { actions } = this.props;
-    await actions.getAMeme(wallId);
+    await actions.getOne(memeId);
+  };
+
+  openEdit = async () => {
+    const { meme, history } = this.props;
+    history.push(`/memes/${meme.id}/edit`);
   };
 
   render() {
@@ -43,6 +48,7 @@ export class Single extends Component {
         {meme ? (
           <>
             <MemeCard
+              onClick={this.openEdit}
               square
               src={meme.image}
               topText={meme.topText}
@@ -70,7 +76,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators({ getAMeme, reactToMeme }, dispatch),
+  actions: bindActionCreators({ getOne, reactToMeme }, dispatch),
 });
 
 export default connect(

@@ -16,7 +16,7 @@ const meme = (state = initialState, { type, memes, meta, current }) => {
     case SET_MEMES:
       return {
         ...state,
-        memes: [...state.memes, ...memes],
+        memes: meta.hasPrevPage ? [...state.memes, ...memes] : memes,
         meta,
       };
     case SET_FEATURED_MEMES:

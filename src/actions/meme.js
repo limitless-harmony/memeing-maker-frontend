@@ -6,6 +6,7 @@ import {
 import api from 'services/api';
 import { startLoader, stopLoader } from 'actions/common';
 import { parseResponse } from 'helpers';
+import { history } from 'store';
 
 const setMemes = (memes, meta = {}) => {
   return {
@@ -31,22 +32,33 @@ const setCurrentMeme = current => {
 export const create = meme => async dispatch => {
   try {
     dispatch(startLoader());
-    const response = await api.post('/memes', meme);
-    const { data } = response.data;
-    const newMeme = parseResponse(data);
-    return dispatch(setMemes([newMeme]));
+    await api.post('/memes', meme);
+    return history.push('/');
   } catch (error) {
     return console.error(error);
   } finally {
     dispatch(stopLoader());
   }
 };
-export const getAMeme = id => async dispatch => {
+
+export const edit = (meme, id) => async dispatch => {
+  try {
+    dispatch(startLoader());
+    await api.put(`/memes/${id}/edit`, meme);
+    return history.push(`/memes/${id}`);
+  } catch (error) {
+    return console.error(error);
+  } finally {
+    dispatch(stopLoader());
+  }
+};
+export const getOne = id => async dispatch => {
   try {
     dispatch(startLoader());
     const response = await api.get(`/memes/${id}`);
     const { data } = response.data;
     const meme = parseResponse(data);
+    meme.creator = parseResponse(meme.creator);
     return dispatch(setCurrentMeme(meme));
   } catch (error) {
     return console.error(error);
@@ -67,7 +79,7 @@ export const getFeatured = () => async dispatch => {
     dispatch(stopLoader());
   }
 };
-export const getMemes = page => async dispatch => {
+export const getMany = page => async dispatch => {
   try {
     dispatch(startLoader());
     const response = await api.get(`/memes?page=${page}`);
@@ -85,12 +97,20 @@ export const getMemes = page => async dispatch => {
 export const reactToMeme = (memeId, reactions) => async dispatch => {
   try {
     dispatch(startLoader());
-    const response = await api.put(`/memes/${memeId}/react`, {
-      reactions,
-    });
-    const { data } = response.data;
-    const meme = parseResponse(data);
-    return dispatch(setCurrentMeme(meme));
+    await api.put(`/memes/${memeId}/react`, { reactions });
+    return history.push(`/memes/${memeId}`);
+  } catch (error) {
+    return console.error(error);
+  } finally {
+    dispatch(stopLoader());
+  }
+};
+
+export const flagMeme = memeId => async dispatch => {
+  try {
+    dispatch(startLoader());
+    await api.put(`/memes/${memeId}/flag`);
+    return history.push(`/memes/${memeId}`);
   } catch (error) {
     return console.error(error);
   } finally {

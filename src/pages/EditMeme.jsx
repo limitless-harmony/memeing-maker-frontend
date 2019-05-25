@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { selectImage, removeImage, showModal } from 'actions/common';
-import { create } from 'actions/meme';
+import { selectImage, showModal, removeImage } from 'actions/common';
+import { edit, getOne } from 'actions/meme';
 import Input from 'components/Input';
 import { GoArrow } from 'components/Icons';
 import Preview from 'components/Preview';
@@ -13,16 +13,51 @@ import { calculateRem } from 'styles';
 import { name } from 'helpers';
 import defaultImage from 'assets/images/create-meme.svg';
 
-export class CreateMeme extends Component {
+export class Edit extends Component {
   state = {
     topText: '',
     bottomText: '',
-    imageUrl: defaultImage,
+    imageUrl: '',
   };
 
-  componentDidMount() {
-    this.loadImage();
+  async componentDidMount() {
+    const { match } = this.props;
+    const {
+      params: { id },
+    } = match;
+    await this.fetchData(id);
   }
+
+  componentDidUpdate(prevProps) {
+    const {
+      match: { params },
+    } = prevProps;
+    const {
+      match: {
+        params: { id },
+      },
+    } = this.props;
+    if (id !== params.id) {
+      this.fetchData(id);
+    }
+  }
+
+  fetchData = async memeId => {
+    const { actions } = this.props;
+    await actions.getOne(memeId);
+    const { meme, user, history } = this.props;
+    if (user.id !== meme.creator.id) {
+      return history.push(`/memes/${meme.id}`);
+    }
+    this.setState(() => {
+      return {
+        topText: meme.topText,
+        bottomText: meme.bottomText,
+        imageUrl: meme.image || defaultImage,
+      };
+    });
+    return this.loadImage();
+  };
 
   selectImage = () => {
     const { actions } = this.props;
@@ -35,14 +70,18 @@ export class CreateMeme extends Component {
     actions.selectImage(imageUrl);
   };
 
-  createMeme = async () => {
+  editMeme = async () => {
     const { topText, bottomText } = this.state;
-    const { actions, selectedImage } = this.props;
-    await actions.create({
-      topText,
-      bottomText,
-      image: selectedImage,
-    });
+    const { actions, selectedImage, meme } = this.props;
+    await actions.edit(
+      {
+        topText,
+        bottomText,
+        image: selectedImage,
+        name: meme.name,
+      },
+      meme.id
+    );
     actions.removeImage();
   };
 
@@ -81,7 +120,7 @@ export class CreateMeme extends Component {
         />
         <ButtonContainer>
           Post to
-          <SubmitMeme onClick={this.createMeme}>{name}</SubmitMeme>
+          <SubmitMeme onClick={this.editMeme}>{name}</SubmitMeme>
           <GoArrow />
         </ButtonContainer>
       </Fragment>
@@ -94,7 +133,8 @@ export const PreviewContainer = styled.div`
 `;
 
 export const ButtonContainer = styled.div`
-  padding: ${calculateRem(4)} ${calculateRem(28)};
+  padding: 0 ${calculateRem(18)};
+  margin: ${calculateRem(4)} ${calculateRem(10)};
   display: flex;
   align-items: center;
   box-sizing: border-box;
@@ -105,7 +145,7 @@ export const SubmitMeme = styled.button`
   color: #4a4a4a;
   background-color: ${inputFill};
   margin: 0 ${calculateRem(14)};
-  padding: ${calculateRem(6)} ${calculateRem(25)};
+  padding: ${calculateRem(6)} ${calculateRem(13)};
   border: none;
   border-radius: ${calculateRem(10)};
   min-width: 60%;
@@ -114,11 +154,13 @@ export const SubmitMeme = styled.button`
 
 const mapStateToProps = state => ({
   selectedImage: state.common.imageUrl,
+  meme: state.meme.current,
+  user: state.auth.user,
 });
 
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(
-    { showModal, selectImage, removeImage, create },
+    { showModal, selectImage, edit, getOne, removeImage },
     dispatch
   ),
 });
@@ -126,4 +168,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(CreateMeme);
+)(Edit);

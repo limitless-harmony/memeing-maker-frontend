@@ -2,9 +2,9 @@ import React from 'react';
 import mojs from 'mo-js';
 import styled from 'styled-components';
 
-import { ThanksReaction } from 'components/Icons';
-import { dark, black } from 'styles/colors';
+import { dark } from 'styles/colors';
 import { calculateRem } from 'styles';
+import ReactionCard from 'components/ReactionCard';
 
 const Reaction = class extends React.Component {
   constructor(props) {
@@ -107,20 +107,14 @@ const Reaction = class extends React.Component {
   render() {
     const { count, countTotal } = this.state;
     return (
-      <ReactionButton
+      <ReactionCard
         id="clap"
         onClick={this.onClick}
         onMouseDown={this.onMouseDown}
         onMouseUp={this.onMouseUp}
-      >
-        <ThanksReaction />
-        <ReactionCount id="clap--count">
-          {count ? <div>+{count}</div> : null}
-        </ReactionCount>
-        <ReactionCountTotal>
-          {Number(countTotal).toLocaleString()}
-        </ReactionCountTotal>
-      </ReactionButton>
+        count={count}
+        total={countTotal}
+      />
     );
   }
 };
@@ -163,24 +157,6 @@ const ReactionButton = styled.button`
   &:focus {
     border: ${calculateRem(2)} solid ${dark};
   }
-`;
-
-const ReactionCount = styled.span`
-  font-size: ${calculateRem(11)};
-  font-weight: bold;
-  line-height: ${calculateRem(13)};
-  color: ${black};
-  top: 10%;
-  left: 50%;
-  position: absolute;
-  backface-visibility: hidden;
-`;
-
-const ReactionCountTotal = styled.div`
-  font-size: ${calculateRem(11)};
-  margin: ${calculateRem(20)} auto 0;
-  line-height: ${calculateRem(13)};
-  font-weight: bold;
 `;
 
 export default Reaction;

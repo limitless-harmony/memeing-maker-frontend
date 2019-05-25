@@ -7,10 +7,9 @@ import {
   SHOW_MODAL,
   HIDE_MODAL,
 } from 'constants/actionTypes';
-import defaultImage from 'assets/images/create-meme.svg';
 
 const initialState = {
-  imageUrl: defaultImage,
+  imageUrl: '',
   loading: false,
   showMenu: false,
   showModal: false,
@@ -44,6 +43,11 @@ const modal = (state = initialState, { type, imageUrl, modalId }) => {
       return {
         ...state,
         showMenu: !state.showMenu,
+      };
+    case '@@router/LOCATION_CHANGE':
+      return {
+        ...state,
+        showMenu: false,
       };
     case SHOW_MODAL:
       return {

@@ -3,7 +3,7 @@
 exports[`Testing the CreateMeme page component renders without crashing 1`] = `
 <Fragment>
   <styled.div>
-    <MemePreview
+    <Preview
       bottomText=""
       onImageClick={[Function]}
       topText=""
