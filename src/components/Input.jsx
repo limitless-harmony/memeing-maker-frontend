@@ -12,6 +12,7 @@ const Input = ({
   onChange,
   filled,
   underline,
+  required,
   textAlign,
   placeholder,
 }) => {

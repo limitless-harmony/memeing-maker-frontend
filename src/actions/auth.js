@@ -1,18 +1,31 @@
-import { USER_LOGGED_IN, LOG_OUT, SET_PATH_FROM } from 'constants/actionTypes';
+import {
+  USER_LOGGED_IN,
+  PROFILE_UPDATED,
+  LOG_OUT,
+  SET_PATH_FROM,
+} from 'constants/actionTypes';
 import { startLoader, stopLoader } from 'actions/common';
 import api from 'services/api';
 import { setAuthToken } from 'helpers/auth';
+import { parseResponse } from 'helpers';
 
-const setPathFrom = path => {
+const setPathFrom = previous => {
   return {
     type: SET_PATH_FROM,
-    path,
+    previous,
   };
 };
 
 const setUser = user => {
   return {
     type: USER_LOGGED_IN,
+    user,
+  };
+};
+
+const updateUser = user => {
+  return {
+    type: PROFILE_UPDATED,
     user,
   };
 };
@@ -30,6 +43,21 @@ export const login = (accessToken, provider) => async dispatch => {
     const { token, ...user } = data;
     await setAuthToken(token);
     return dispatch(setUser(user));
+  } catch (error) {
+    return console.error(error);
+  } finally {
+    dispatch(stopLoader());
+  }
+};
+
+export const edit = profile => async dispatch => {
+  console.log(profile);
+  try {
+    dispatch(startLoader());
+    const response = await api.put('/users', profile);
+    const { data } = response.data;
+    const user = parseResponse(data);
+    return dispatch(updateUser(user));
   } catch (error) {
     return console.error(error);
   } finally {

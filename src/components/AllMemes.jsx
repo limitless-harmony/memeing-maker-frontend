@@ -3,13 +3,20 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
+import { savePathFrom } from 'actions/auth';
 import { calculateRem } from 'styles';
 import { getMany } from 'actions/meme';
 import MemeContainer from 'components/MemeContainer';
 
 export class AllMemes extends Component {
   componentDidMount() {
-    this.fetchMemes();
+    const { history, actions, user } = this.props;
+    if (!user.isComplete) {
+      const { pathname } = history.location;
+      actions.savePathFrom(pathname);
+      return history.push('/edit-profile');
+    }
+    return this.fetchMemes();
   }
 
   fetchMemes = async () => {
@@ -55,11 +62,12 @@ const SectionHeading = styled.div`
 
 const mapStateToProps = state => ({
   memes: state.meme.memes,
+  user: state.auth.user,
   meta: state.meme.meta,
 });
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators({ getMany }, dispatch),
+  actions: bindActionCreators({ getMany, savePathFrom }, dispatch),
 });
 
 export default connect(
