@@ -4,13 +4,12 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import { selectImage, showModal, removeImage } from 'actions/common';
-import { edit } from 'actions/auth';
+import { edit, savePathFrom, clearPathFrom } from 'actions/auth';
 import Input from 'components/Input';
-import { GoArrow } from 'components/Icons';
-import Preview from 'components/Preview';
-import { inputFill, pink, dark } from 'styles/colors';
+import { pink } from 'styles/colors';
 import { calculateRem } from 'styles';
 import defaultImage from 'assets/images/serious-cat.jpg';
+import MemeForm from 'components/MemeForm';
 
 export class EditProfile extends Component {
   state = {
@@ -19,9 +18,11 @@ export class EditProfile extends Component {
     image: '',
     username: '',
     error: '',
+    size: '',
   };
 
   async componentDidMount() {
+    this.setState({ size: this.widthRef.offsetWidth });
     const { authenticated, history, actions } = this.props;
     if (!authenticated) {
       const { pathname } = history.location;
@@ -70,7 +71,8 @@ export class EditProfile extends Component {
     this.loadData();
     actions.removeImage();
     const path = previousPath || '/';
-    return history.push(path);
+    history.push(path);
+    return actions.clearPathFrom();
   };
 
   changeText = event => {
@@ -81,52 +83,41 @@ export class EditProfile extends Component {
   };
 
   render() {
-    const { topText, bottomText, username, error } = this.state;
+    const { topText, bottomText, username, error, size } = this.state;
     const { selectedImage } = this.props;
     return (
       <>
-        <PreviewContainer>
-          <Preview
+        <Container
+          ref={widthRef => {
+            this.widthRef = widthRef;
+          }}
+        >
+          <Input
+            value={username}
+            name="username"
+            underline
+            focused
+            onChange={this.changeText}
+            placeholder="Choose a unique username"
+          />
+          {error && <Error>{error}</Error>}
+          <MemeForm
             image={selectedImage}
             topText={topText}
             bottomText={bottomText}
-            onImageClick={this.selectImage}
+            size={size}
+            onChange={this.changeText}
+            selectImage={this.selectImage}
+            onSubmit={this.editProfile}
+            submitText="Player Profile"
           />
-        </PreviewContainer>
-        <Input
-          value={username}
-          name="username"
-          underline
-          onChange={this.changeText}
-          placeholder="Choose a username"
-          required
-        />
-        {error && <Error>{error}</Error>}
-        <Input
-          value={topText}
-          name="topText"
-          underline
-          onChange={this.changeText}
-          placeholder="Enter top text"
-        />
-        <Input
-          value={bottomText}
-          name="bottomText"
-          onChange={this.changeText}
-          underline
-          placeholder="Enter bottom text"
-        />
-        <ButtonContainer>
-          Post to
-          <Submit onClick={this.editProfile}>Player Profile</Submit>
-          <GoArrow />
-        </ButtonContainer>
+        </Container>
       </>
     );
   }
 }
 
-export const PreviewContainer = styled.div`
+const Container = styled.div`
   width: 100%;
 `;
 
@@ -138,27 +129,6 @@ const Error = styled.div`
   margin: 0 auto;
 `;
 
-export const ButtonContainer = styled.div`
-  padding: 0 ${calculateRem(18)};
-  margin: ${calculateRem(4)} ${calculateRem(10)};
-  display: flex;
-  align-items: center;
-  box-sizing: border-box;
-  width: 100%;
-`;
-
-export const Submit = styled.button`
-  color: ${dark};
-  background-color: ${inputFill};
-  margin: 0 ${calculateRem(14)};
-  padding: ${calculateRem(6)} ${calculateRem(13)};
-  border: none;
-  cursor: pointer;
-  border-radius: ${calculateRem(10)};
-  min-width: 60%;
-  text-align: center;
-`;
-
 const mapStateToProps = state => ({
   selectedImage: state.common.imageUrl,
   authenticated: state.auth.authenticated,
@@ -168,7 +138,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(
-    { showModal, selectImage, edit, removeImage },
+    { showModal, selectImage, edit, removeImage, savePathFrom, clearPathFrom },
     dispatch
   ),
 });

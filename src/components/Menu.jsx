@@ -40,7 +40,7 @@ export class Menu extends Component {
   };
 
   render() {
-    const { meme, wall, authenticated, history } = this.props;
+    const { meme, wall, authenticated, history, user } = this.props;
     console.log(history);
     return (
       <StyledMenu>
@@ -49,9 +49,9 @@ export class Menu extends Component {
             <MenuItem>
               Meme created by
               <Inlet>
-                <Link to={`/users/${meme.creator.id}`}>
+                <StyledLink to={`/users/${meme.creator.id}`}>
                   @{meme.creator.username}
-                </Link>
+                </StyledLink>
               </Inlet>
             </MenuItem>
             <MenuItem onClick={this.flagMeme}>Flag meme</MenuItem>
@@ -61,12 +61,20 @@ export class Menu extends Component {
           <MenuItem>
             Meme wall created by
             <Inlet>
-              <Link to={`/users/${wall.creator.id}`}>@{wall.creator.name}</Link>
+              <StyledLink to={`/users/${wall.creator.id}`}>
+                @{wall.creator.username}
+              </StyledLink>
             </Inlet>
           </MenuItem>
         )}
-        <MenuItem>View your profile</MenuItem>
-        <MenuItem>View rules of play</MenuItem>
+        {authenticated && (
+          <MenuItem>
+            <StyledLink to={`/users/${user.id}`}>View your profile</StyledLink>
+          </MenuItem>
+        )}
+        <MenuItem>
+          <StyledLink to="/rules">View rules of play</StyledLink>
+        </MenuItem>
         {authenticated ? (
           <MenuItem onClick={this.logout}>Log out</MenuItem>
         ) : (
@@ -101,6 +109,12 @@ const MenuItem = styled.div`
   color: ${dark};
   width: 100%;
 `;
+
+const StyledLink = styled(Link)`
+  cursor: pointer;
+  color: ${dark};
+  text-decoration: none;
+`;
 const Inlet = styled.div`
   padding: 0 ${calculateRem(40)};
   box-sizing: border-box;
@@ -118,6 +132,7 @@ const mapStateToProps = state => ({
   wall: state.wall.current,
   location: state.router.location,
   authenticated: state.auth.authenticated,
+  user: state.auth.user,
 });
 
 export default connect(

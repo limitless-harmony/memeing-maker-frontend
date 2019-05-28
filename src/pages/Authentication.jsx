@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { parse } from 'query-string';
 import { bindActionCreators } from 'redux';
 
-import { login } from 'actions/auth';
+import { login, clearPathFrom } from 'actions/auth';
 import Loading from 'components/Loading';
 
 export class Authentication extends Component {
@@ -39,7 +39,8 @@ export class Authentication extends Component {
     const path = previousPath || '/';
     if (authenticated) return history.push(path);
     await actions.login(code, provider);
-    return history.push(path);
+    history.push(path);
+    return actions.clearPathFrom();
   };
 
   render() {
@@ -53,7 +54,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators({ login }, dispatch),
+  actions: bindActionCreators({ login, clearPathFrom }, dispatch),
 });
 
 export default connect(

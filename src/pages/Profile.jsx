@@ -38,21 +38,31 @@ export class Profile extends Component {
     await actions.getProfile(userId);
   };
 
+  openEdit = async () => {
+    const { loggedInUser, history, match } = this.props;
+    const {
+      params: { id },
+    } = match;
+    if (loggedInUser.id !== id) return;
+    history.push('/edit-profile');
+  };
+
   render() {
-    const { user, memes, walls } = this.props;
+    const { profile, memes, walls } = this.props;
     return (
       <>
         <Container>
-          {user && (
+          {profile && (
             <>
-              <Username>@{user.username}</Username>
+              <Username>@{profile.username}</Username>
               <MemeCard
+                onClick={this.openEdit}
                 square
-                src={user.image}
-                topText={user.topText}
-                bottomText={user.bottomText}
+                src={profile.image}
+                topText={profile.topText}
+                bottomText={profile.bottomText}
               />
-              <ReactionCard total={user.reactions} />
+              <ReactionCard total={profile.reactions} />
             </>
           )}
         </Container>
@@ -84,7 +94,8 @@ const Container = styled.div`
 `;
 
 const mapStateToProps = state => ({
-  user: state.user.profile,
+  profile: state.user.profile,
+  loggedInUser: state.auth.user,
   memes: state.user.memes,
   walls: state.user.walls,
 });

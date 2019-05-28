@@ -6,6 +6,7 @@ export const TOGGLE_MENU = 'TOGGLE_MENU';
 export const USER_LOGGED_IN = 'USER_LOGGED_IN';
 export const PROFILE_UPDATED = 'PROFILE_UPDATED';
 export const SET_PATH_FROM = 'SET_PATH_FROM';
+export const CLEAR_PATH_FROM = 'CLEAR_PATH_FROM';
 export const LOG_OUT = 'LOG_OUT';
 export const SELECT_IMAGE = 'SELECT_IMAGE';
 export const REMOVE_IMAGE = 'REMOVE_IMAGE';
