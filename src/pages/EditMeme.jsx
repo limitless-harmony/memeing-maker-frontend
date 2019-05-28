@@ -1,26 +1,26 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import { selectImage, showModal, removeImage } from 'actions/common';
 import { edit, getOne } from 'actions/meme';
-import Input from 'components/Input';
-import { GoArrow } from 'components/Icons';
-import Preview from 'components/Preview';
 import { inputFill, dark } from 'styles/colors';
 import { calculateRem } from 'styles';
 import { name } from 'helpers';
 import defaultImage from 'assets/images/create-meme.svg';
+import MemeForm from 'components/MemeForm';
 
 export class Edit extends Component {
   state = {
     topText: '',
     bottomText: '',
+    size: '',
     imageUrl: '',
   };
 
   async componentDidMount() {
+    this.setState({ size: this.widthRef.offsetWidth });
     const { match } = this.props;
     const {
       params: { id },
@@ -92,43 +92,30 @@ export class Edit extends Component {
   };
 
   render() {
-    const { topText, bottomText } = this.state;
+    const { topText, bottomText, size } = this.state;
     const { selectedImage } = this.props;
     return (
-      <Fragment>
-        <PreviewContainer>
-          <Preview
-            image={selectedImage}
-            topText={topText}
-            bottomText={bottomText}
-            onImageClick={this.selectImage}
-          />
-        </PreviewContainer>
-        <Input
-          value={topText}
-          name="topText"
-          underline
+      <Container
+        ref={widthRef => {
+          this.widthRef = widthRef;
+        }}
+      >
+        <MemeForm
+          image={selectedImage}
+          topText={topText}
+          bottomText={bottomText}
+          size={size}
           onChange={this.changeText}
-          placeholder="Enter top text"
+          selectImage={this.selectImage}
+          onSubmit={this.editMeme}
+          submitText={name}
         />
-        <Input
-          value={bottomText}
-          name="bottomText"
-          onChange={this.changeText}
-          underline
-          placeholder="Enter bottom text"
-        />
-        <ButtonContainer>
-          Post to
-          <SubmitMeme onClick={this.editMeme}>{name}</SubmitMeme>
-          <GoArrow />
-        </ButtonContainer>
-      </Fragment>
+      </Container>
     );
   }
 }
 
-export const PreviewContainer = styled.div`
+export const Container = styled.div`
   width: 100%;
 `;
 

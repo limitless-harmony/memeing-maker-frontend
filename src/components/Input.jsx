@@ -10,9 +10,9 @@ const Input = ({
   value,
   name,
   onChange,
+  focused,
   filled,
   underline,
-  required,
   textAlign,
   placeholder,
 }) => {
@@ -27,6 +27,7 @@ const Input = ({
         underline={underline}
         maxLength={maxLength}
         placeholder={placeholder}
+        autoFocus={focused}
         onChange={onChange}
       />
     </Container>
@@ -51,7 +52,7 @@ const StyledInput = styled.input`
   height: ${calculateRem(36)};
   border: none;
   outline: none;
-  width: 65%;
+  width: 70%;
   border-radius: ${calculateRem(10)};
   &::placeholder {
     text-decoration: ${({ underline }) => (underline ? 'underline' : 'none')};

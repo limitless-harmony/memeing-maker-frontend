@@ -2,6 +2,7 @@ import {
   USER_LOGGED_IN,
   LOG_OUT,
   SET_PATH_FROM,
+  CLEAR_PATH_FROM,
   PROFILE_UPDATED,
 } from 'constants/actionTypes';
 import storage from 'helpers/storage';
@@ -29,6 +30,11 @@ const auth = (state = initialState, { type, user, previous }) => {
       return {
         ...state,
         previous,
+      };
+    case CLEAR_PATH_FROM:
+      return {
+        ...state,
+        previous: '',
       };
     case LOG_OUT:
       storage.clear();

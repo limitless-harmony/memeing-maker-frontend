@@ -7,7 +7,7 @@ export const mobileWidth = 420;
 export const pxToVw = (px, width) => `${(100 * px) / width}vw`;
 
 export const setFontSize = (text, small) => {
-  const lowerCharacter = 30;
+  const lowerCharacter = 24;
   const upperCharacter = 70;
   const lowerFontSize = small ? 8 : 20;
   const upperFontSize = small ? 14 : 28;
@@ -20,4 +20,20 @@ export const setFontSize = (text, small) => {
       : upperFontSize;
   fontSize = fontSize > lowerFontSize ? fontSize : lowerFontSize;
   return fontSize;
+};
+
+export const setTextAreaHeight = (text, size) => {
+  const lineCharacters = 24;
+  const minHeight = 45;
+  const maxHeight = size / 6;
+
+  const { length } = text;
+  const calculatedHeight = minHeight + (length - lineCharacters) * 2;
+  const height =
+    length <= lineCharacters
+      ? minHeight
+      : calculatedHeight < maxHeight
+      ? calculatedHeight
+      : maxHeight;
+  return height;
 };

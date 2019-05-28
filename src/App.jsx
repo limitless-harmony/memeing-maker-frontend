@@ -34,7 +34,7 @@ const MainContainer = styled.div`
   flex-direction: column;
   margin: 0 auto;
   font-size: inherit;
-  padding: ${calculateRem(36)} ${calculateRem(14)};
+  padding: ${calculateRem(46)} ${calculateRem(14)} ${calculateRem(20)};
   width: 100%;
   max-width: ${calculateRem(mobileWidth)};
   box-sizing: border-box;
