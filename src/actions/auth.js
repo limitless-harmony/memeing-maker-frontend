@@ -8,7 +8,6 @@ import {
 import { startLoader, stopLoader } from 'actions/common';
 import api from 'services/api';
 import { setAuthToken } from 'helpers/auth';
-import { parseResponse } from 'helpers';
 
 const setPathFrom = previous => ({
   type: SET_PATH_FROM,
@@ -50,13 +49,11 @@ export const login = (accessToken, provider) => async dispatch => {
 };
 
 export const edit = profile => async dispatch => {
-  console.log(profile);
   try {
     dispatch(startLoader());
     const response = await api.put('/users', profile);
     const { data } = response.data;
-    const user = parseResponse(data);
-    return dispatch(updateUser(user));
+    return dispatch(updateUser(data));
   } catch (error) {
     return console.error(error);
   } finally {
