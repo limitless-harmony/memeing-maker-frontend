@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { calculateRem } from 'styles';
-import { getProfile } from 'actions/user';
+import { getProfile, reactToProfile } from 'actions/user';
 import MemeCard from 'components/MemeCard';
-import ReactionCard from 'components/ReactionCard';
+import Reaction from 'components/Reaction';
 import MemeContainer from 'components/MemeContainer';
 import WallContainer from 'components/WallContainer';
 
@@ -48,7 +48,7 @@ export class Profile extends Component {
   };
 
   render() {
-    const { profile, memes, walls } = this.props;
+    const { profile, memes, walls, actions } = this.props;
     return (
       <>
         <Container>
@@ -62,12 +62,19 @@ export class Profile extends Component {
                 topText={profile.topText}
                 bottomText={profile.bottomText}
               />
-              <ReactionCard total={profile.reactions} />
+              <Reaction
+                model={profile}
+                handleReaction={actions.reactToProfile}
+              />
             </>
           )}
         </Container>
         <MemeTitle>Memeing Made</MemeTitle>
-        <MemeContainer memes={memes} />
+        {memes.length ? (
+          <MemeContainer memes={memes} />
+        ) : (
+          <SectionHeading>No memes created yet!</SectionHeading>
+        )}
         <WallContainer walls={walls} />
       </>
     );
@@ -82,6 +89,11 @@ const Username = styled.div`
 const MemeTitle = styled.div`
   font-size: ${calculateRem(18)};
   margin: ${calculateRem(19)} auto;
+`;
+
+const SectionHeading = styled.div`
+  font-size: ${calculateRem(18)};
+  margin: ${calculateRem(16)} auto;
 `;
 
 const Container = styled.div`
@@ -101,7 +113,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators({ getProfile }, dispatch),
+  actions: bindActionCreators({ getProfile, reactToProfile }, dispatch),
 });
 
 export default connect(

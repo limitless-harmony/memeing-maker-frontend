@@ -2,12 +2,11 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { toast } from 'react-toastify';
 
 import { selectImage, showModal, removeImage } from 'actions/common';
 import { edit, savePathFrom, clearPathFrom } from 'actions/auth';
 import Input from 'components/Input';
-import { pink } from 'styles/colors';
-import { calculateRem } from 'styles';
 import defaultImage from 'assets/images/serious-cat.jpg';
 import MemeForm from 'components/MemeForm';
 
@@ -17,7 +16,6 @@ export class EditProfile extends Component {
     bottomText: '',
     image: '',
     username: '',
-    error: '',
     size: '',
   };
 
@@ -43,6 +41,9 @@ export class EditProfile extends Component {
         username,
       };
     });
+    if (!user.isComplete) {
+      toast.info('Welcome on board. Start by creating your profile meme');
+    }
     return this.loadImage();
   };
 
@@ -60,13 +61,15 @@ export class EditProfile extends Component {
   editProfile = async () => {
     const { topText, bottomText, username } = this.state;
     const { actions, selectedImage, history, previousPath } = this.props;
-    if (!username)
-      return this.setState({ error: 'Please choose a unique username!' });
+    if (!username) {
+      window.scrollTo(0, 0);
+      return toast.error('Please choose a unique username!');
+    }
     await actions.edit({
       topText,
       bottomText,
       image: selectedImage,
-      username,
+      username: username.replace(/@/g, ''),
     });
     this.loadData();
     actions.removeImage();
@@ -76,14 +79,13 @@ export class EditProfile extends Component {
   };
 
   changeText = event => {
-    if (event.currentTarget.name === 'username') this.setState({ error: '' });
     this.setState({
       [event.currentTarget.name]: event.currentTarget.value,
     });
   };
 
   render() {
-    const { topText, bottomText, username, error, size } = this.state;
+    const { topText, bottomText, username, size } = this.state;
     const { selectedImage } = this.props;
     return (
       <>
@@ -100,7 +102,6 @@ export class EditProfile extends Component {
             onChange={this.changeText}
             placeholder="Choose a unique username"
           />
-          {error && <Error>{error}</Error>}
           <MemeForm
             image={selectedImage}
             topText={topText}
@@ -119,14 +120,6 @@ export class EditProfile extends Component {
 
 const Container = styled.div`
   width: 100%;
-`;
-
-const Error = styled.div`
-  width: 100%;
-  font-size: ${calculateRem(13)};
-  color: ${pink};
-  text-align: center;
-  margin: 0 auto;
 `;
 
 const mapStateToProps = state => ({

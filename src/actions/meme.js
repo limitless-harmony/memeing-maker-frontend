@@ -52,6 +52,7 @@ export const edit = (meme, id) => async dispatch => {
     dispatch(stopLoader());
   }
 };
+
 export const getOne = id => async dispatch => {
   try {
     dispatch(startLoader());
@@ -66,6 +67,7 @@ export const getOne = id => async dispatch => {
     dispatch(stopLoader());
   }
 };
+
 export const getFeatured = () => async dispatch => {
   try {
     dispatch(startLoader());
@@ -79,6 +81,7 @@ export const getFeatured = () => async dispatch => {
     dispatch(stopLoader());
   }
 };
+
 export const getMany = page => async dispatch => {
   try {
     dispatch(startLoader());
@@ -97,8 +100,7 @@ export const getMany = page => async dispatch => {
 export const reactToMeme = (memeId, reactions) => async dispatch => {
   try {
     dispatch(startLoader());
-    await api.put(`/memes/${memeId}/react`, { reactions });
-    return history.push(`/memes/${memeId}`);
+    return api.put(`/memes/${memeId}/react`, { reactions });
   } catch (error) {
     return console.error(error);
   } finally {

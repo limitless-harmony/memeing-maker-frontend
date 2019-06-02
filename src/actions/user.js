@@ -29,3 +29,14 @@ export const getProfile = id => async dispatch => {
     dispatch(stopLoader());
   }
 };
+
+export const reactToProfile = (userId, reactions) => async dispatch => {
+  try {
+    dispatch(startLoader());
+    return api.put(`/users/${userId}/react`, { reactions });
+  } catch (error) {
+    return console.error(error);
+  } finally {
+    dispatch(stopLoader());
+  }
+};

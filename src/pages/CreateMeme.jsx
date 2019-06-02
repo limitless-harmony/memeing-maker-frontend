@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { toast } from 'react-toastify';
 
 import { selectImage, removeImage, showModal } from 'actions/common';
 import { create } from 'actions/meme';
@@ -14,7 +15,7 @@ export class CreateMeme extends Component {
     topText: '',
     bottomText: '',
     size: '',
-    imageUrl: defaultImage,
+    defaultImageUrl: defaultImage,
   };
 
   componentDidMount() {
@@ -29,19 +30,22 @@ export class CreateMeme extends Component {
 
   loadImage = () => {
     const { actions } = this.props;
-    const { imageUrl } = this.state;
-    actions.selectImage(imageUrl);
+    const { defaultImageUrl } = this.state;
+    actions.selectImage(defaultImageUrl);
   };
 
   createMeme = async () => {
-    const { topText, bottomText } = this.state;
+    const { topText, bottomText, defaultImageUrl } = this.state;
     const { actions, selectedImage } = this.props;
+    if (selectedImage === defaultImageUrl)
+      return toast.error('Please select an image first!');
+
     await actions.create({
       topText,
       bottomText,
       image: selectedImage,
     });
-    actions.removeImage();
+    return actions.removeImage();
   };
 
   changeText = event => {

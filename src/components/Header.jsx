@@ -42,7 +42,7 @@ export class Header extends Component {
             </Link>
           </NavItem>
           <NavItem>
-            <ShareButton width="18" height="18" onClick={this.share} />
+            <ShareButton width="30" height="30" onClick={this.share} />
           </NavItem>
         </NavLeft>
         <NavRight>
@@ -59,7 +59,7 @@ export const StyledHeader = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: ${calculateRem(36)};
+  height: ${calculateRem(48)};
   padding: 0 ${calculateRem(14)};
   background: ${white};
   position: fixed;
@@ -79,10 +79,10 @@ const NavItem = styled.div`
   cursor: pointer;
   margin: ${({ first, last }) =>
     first
-      ? `0 ${calculateRem(5)} 0 0`
+      ? `0 ${calculateRem(8)} 0 0`
       : last
-      ? `0 0 0 ${calculateRem(5)}`
-      : `0 ${calculateRem(5)}`};
+      ? `0 0 0 ${calculateRem(8)}`
+      : `0 ${calculateRem(8)}`};
 `;
 
 const NavSection = styled.div`

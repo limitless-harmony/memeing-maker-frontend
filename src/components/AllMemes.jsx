@@ -38,7 +38,7 @@ export class AllMemes extends Component {
             />
           </>
         ) : (
-          <SectionHeading>No meme available yet!</SectionHeading>
+          <SectionHeading>No memes created yet!</SectionHeading>
         )}
       </StyledFeatured>
     );
