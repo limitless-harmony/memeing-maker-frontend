@@ -15,10 +15,10 @@ const Reaction = class extends React.Component {
   }
 
   componentDidMount() {
-    const { meme } = this.props;
+    const { model } = this.props;
     this.setState(() => {
       return {
-        countTotal: meme.reactions,
+        countTotal: model.reactions,
       };
     });
     const tlDuration = 400;
@@ -46,14 +46,14 @@ const Reaction = class extends React.Component {
 
   componentDidUpdate(prevProps) {
     const {
-      meme: { reactions },
+      model: { reactions },
     } = prevProps;
-    const { meme } = this.props;
-    if (reactions !== meme.reactions) {
+    const { model } = this.props;
+    if (reactions !== model.reactions) {
       // eslint-disable-next-line react/no-did-update-set-state
       this.setState(() => {
         return {
-          countTotal: meme.reactions,
+          countTotal: model.reactions,
         };
       });
     }
@@ -84,7 +84,7 @@ const Reaction = class extends React.Component {
     });
     const { timerId } = this.state;
     clearTimeout(timerId);
-    const timer = setTimeout(this.reactToMeme, 1000);
+    const timer = setTimeout(this.handleReaction, 1000);
     this.setState(() => {
       return {
         timerId: timer,
@@ -92,10 +92,10 @@ const Reaction = class extends React.Component {
     });
   };
 
-  reactToMeme = () => {
-    const { reactToMeme, meme } = this.props;
+  handleReaction = () => {
+    const { handleReaction, model } = this.props;
     const { count } = this.state;
-    reactToMeme(meme.id, count);
+    handleReaction(model.id, count);
     this.setState(() => {
       return { count: 0 };
     });

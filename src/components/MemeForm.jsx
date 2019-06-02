@@ -43,9 +43,12 @@ const MemeForm = ({
       placeholder="click to enter text"
     />
     <ButtonContainer>
-      Post to
-      <SubmitMeme onClick={onSubmit}>{submitText}</SubmitMeme>
-      <GoArrow />
+      <Text>
+        Post to <span>{submitText}</span>
+      </Text>
+      <SubmitMeme onClick={onSubmit}>
+        <GoArrow />
+      </SubmitMeme>
     </ButtonContainer>
   </>
 );
@@ -62,16 +65,27 @@ export const ButtonContainer = styled.div`
   width: 100%;
 `;
 
-const SubmitMeme = styled.button`
+const Text = styled.div`
   color: ${dark};
-  background-color: ${inputFill};
-  margin: 0 ${calculateRem(14)};
-  padding: ${calculateRem(6)} ${calculateRem(25)};
-  border: none;
-  cursor: pointer;
-  border-radius: ${calculateRem(10)};
-  min-width: 60%;
+  min-width: 50%;
   text-align: center;
+  span {
+    background-color: ${inputFill};
+    margin: 0 ${calculateRem(14)};
+    padding: ${calculateRem(5)} ${calculateRem(25)};
+    border-radius: ${calculateRem(10)};
+  }
+`;
+
+const SubmitMeme = styled.button`
+  text-align: center;
+  cursor: pointer;
+  border: none;
+  background: none;
+  padding: ${calculateRem(5)};
+  svg {
+    display: block;
+  }
 `;
 
 export default MemeForm;

@@ -40,32 +40,12 @@ const ReactionButton = styled.button`
   text-align: center;
   height: ${calculateRem(53)};
   border: ${calculateRem(2)} solid ${dark};
-  &::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: block;
-    border-radius: 50%;
-  }
 
   &:hover {
     cursor: pointer;
   }
-
-  &::after {
-    width: ${calculateRem(53)};
-    height: ${calculateRem(53)};
-    border-color: ${dark};
-    color: ${dark};
-    fill: ${dark};
-  }
-
-  &:hover,
-  &:focus {
-    border: ${calculateRem(2)} solid ${dark};
-  }
 `;
+
 const ReactionCount = styled.span`
   font-size: ${calculateRem(11)};
   font-weight: bold;

@@ -37,7 +37,8 @@ export class Single extends Component {
   };
 
   openEdit = async () => {
-    const { meme, history } = this.props;
+    const { meme, history, user } = this.props;
+    if (user.id !== meme.creator.id) return;
     history.push(`/memes/${meme.id}/edit`);
   };
 
@@ -54,7 +55,7 @@ export class Single extends Component {
               topText={meme.topText}
               bottomText={meme.bottomText}
             />
-            <Reaction meme={meme} reactToMeme={actions.reactToMeme} />
+            <Reaction model={meme} handleReaction={actions.reactToMeme} />
           </>
         ) : null}
       </Container>
@@ -73,6 +74,7 @@ const Container = styled.div`
 
 const mapStateToProps = state => ({
   meme: state.meme.current,
+  user: state.auth.user,
 });
 
 const mapDispatchToProps = dispatch => ({

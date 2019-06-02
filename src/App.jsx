@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { ConnectedRouter } from 'connected-react-router';
 import { connect } from 'react-redux';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import RootModal from 'components/Modal';
 import SelectImageModal from 'components/SelectImage';
@@ -24,6 +26,7 @@ export const App = ({ history, showMenu, loading, showModal, modalId }) => {
             {modalId === 'share' && <ShareModal />}
           </RootModal>
         )}
+        <ToastContainer autoClose={5000} />
       </MainContainer>
     </ConnectedRouter>
   );
