@@ -40,84 +40,95 @@ export class Menu extends Component {
   };
 
   render() {
-    const { meme, wall, authenticated, history, user } = this.props;
-    console.log(history);
+    const { meme, wall, authenticated, user } = this.props;
     return (
-      <StyledMenu>
-        {meme && this.isPage('/memes/') && (
-          <>
-            <MenuItem>
-              Meme created by
-              <Inlet>
+      <Container>
+        <StyledMenu>
+          {meme && this.isPage('/memes/') && (
+            <>
+              <MenuItem>
+                Meme created by{' '}
                 <StyledLink to={`/users/${meme.creator.id}`}>
                   @{meme.creator.username}
                 </StyledLink>
-              </Inlet>
-            </MenuItem>
-            <MenuItem onClick={this.flagMeme}>Flag meme</MenuItem>
-          </>
-        )}
-        {wall && this.isPage('/walls/') && (
-          <MenuItem>
-            Meme wall created by
-            <Inlet>
+              </MenuItem>
+              <MenuItem onClick={this.flagMeme}>Flag meme</MenuItem>
+            </>
+          )}
+          {wall && this.isPage('/walls/') && (
+            <MenuItem>
+              Meme wall created by{' '}
               <StyledLink to={`/users/${wall.creator.id}`}>
                 @{wall.creator.username}
               </StyledLink>
-            </Inlet>
-          </MenuItem>
-        )}
-        {authenticated && (
+            </MenuItem>
+          )}
+          {authenticated && (
+            <MenuItem>
+              <StyledLink to={`/users/${user.id}`}>
+                View your profile
+              </StyledLink>
+            </MenuItem>
+          )}
           <MenuItem>
-            <StyledLink to={`/users/${user.id}`}>View your profile</StyledLink>
+            <StyledLink to="/rules">View rules of play</StyledLink>
           </MenuItem>
-        )}
-        <MenuItem>
-          <StyledLink to="/rules">View rules of play</StyledLink>
-        </MenuItem>
-        {authenticated ? (
-          <MenuItem onClick={this.logout}>Log out</MenuItem>
-        ) : (
-          <MenuItem onClick={this.login}>Login</MenuItem>
-        )}
-      </StyledMenu>
+          {authenticated ? (
+            <MenuItem onClick={this.logout}>Log out</MenuItem>
+          ) : (
+            <MenuItem onClick={this.login}>Login</MenuItem>
+          )}
+        </StyledMenu>
+      </Container>
     );
   }
 }
+
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  z-index: 5;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.8);
+  max-width: ${calculateRem(mobileWidth)};
+  box-sizing: border-box;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+`;
 
 const StyledMenu = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100vh;
   background: ${white};
-  position: fixed;
-  z-index: 5;
+  z-index: 6;
+  height: 80%;
+  max-height: ${calculateRem(640)};
   width: 100%;
   max-width: ${calculateRem(mobileWidth)};
+  border: ${calculateRem(2)} solid ${dark};
   box-sizing: border-box;
-  left: 50%;
-  top: 0%;
-  transform: translateX(-50%);
-  padding: ${calculateRem(60)} ${calculateRem(40)};
-  font-size: ${calculateRem(15)};
-  line-height: ${calculateRem(23)};
+  border-radius: ${calculateRem(15)};
+  margin: ${calculateRem(60)} ${calculateRem(30)};
+  padding: ${calculateRem(60)} ${calculateRem(20)};
+  font-size: ${calculateRem(22)};
+  line-height: ${calculateRem(28)};
 `;
 
 const MenuItem = styled.div`
   cursor: pointer;
   color: ${dark};
-  width: 100%;
+  margin-bottom: ${calculateRem(60)};
+  text-align: center;
 `;
 
 const StyledLink = styled(Link)`
   cursor: pointer;
   color: ${dark};
   text-decoration: none;
-`;
-const Inlet = styled.div`
-  padding: 0 ${calculateRem(40)};
-  box-sizing: border-box;
 `;
 
 const mapDispatchToProps = dispatch => ({

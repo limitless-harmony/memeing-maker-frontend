@@ -29,7 +29,7 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: ${calculateRem(18)} auto ${calculateRem(40)};
+  margin: 0 auto ${calculateRem(40)};
   width: 100%;
 `;
 

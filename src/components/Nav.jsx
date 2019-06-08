@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { calculateRem, mobileWidth } from 'styles';
-import { ShareButton, Discover, Ellipsis, Create } from 'components/Icons';
+import { ShareButton, Discover, Create } from 'components/Icons';
 import { white } from 'styles/colors';
 import { showModal, toggleMenu } from 'actions/common';
 import { savePathFrom } from 'actions/auth';
 
-export class Header extends Component {
+export class Nav extends Component {
   share = () => {
     const { authenticated, actions, location, history } = this.props;
     if (!authenticated) {
@@ -29,38 +28,33 @@ export class Header extends Component {
 
   render() {
     return (
-      <StyledHeader>
-        <NavLeft>
-          <NavItem first>
-            <Link to="/">
-              <Discover />
-            </Link>
-          </NavItem>
-          <NavItem>
-            <Link to="/create">
-              <Create />
-            </Link>
-          </NavItem>
-          <NavItem>
-            <ShareButton width="30" height="30" onClick={this.share} />
-          </NavItem>
-        </NavLeft>
-        <NavRight>
-          <NavItem last>
-            <Ellipsis onClick={this.toggleMenu} />
-          </NavItem>
-        </NavRight>
-      </StyledHeader>
+      <StyledNav>
+        <NavItem first>
+          <Link to="/">
+            <Discover />
+          </Link>
+          Discover
+        </NavItem>
+        <NavItem>
+          <Link to="/create">
+            <Create />
+          </Link>
+          Create
+        </NavItem>
+        <NavItem>
+          <ShareButton width="25" height="25" onClick={this.share} />
+          Share
+        </NavItem>
+      </StyledNav>
     );
   }
 }
 
-export const StyledHeader = styled.header`
+const StyledNav = styled.header`
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: ${calculateRem(48)};
-  padding: 0 ${calculateRem(14)};
+  justify-content: center;
+  /* margin: ${calculateRem(5)}; */
+  padding: ${calculateRem(5)} ${calculateRem(14)};
   background: ${white};
   position: fixed;
   z-index: 10;
@@ -68,34 +62,17 @@ export const StyledHeader = styled.header`
   max-width: ${calculateRem(mobileWidth)};
   box-sizing: border-box;
   left: 50%;
-  top: 0%;
+  bottom: 0%;
   transform: translateX(-50%);
 `;
 
 const NavItem = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
-  margin: ${({ first, last }) =>
-    first
-      ? `0 ${calculateRem(8)} 0 0`
-      : last
-      ? `0 0 0 ${calculateRem(8)}`
-      : `0 ${calculateRem(8)}`};
-`;
-
-const NavSection = styled.div`
-  display: flex;
-  flex: 1;
-`;
-
-const NavLeft = styled(NavSection)`
-  justify-content: flex-start;
-`;
-
-const NavRight = styled(NavSection)`
-  justify-content: flex-end;
+  margin: 0 ${calculateRem(10)};
 `;
 
 const mapStateToProps = state => ({
@@ -113,4 +90,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Header);
+)(Nav);

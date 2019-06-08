@@ -6,7 +6,14 @@ import {
   TOGGLE_MENU,
   HIDE_MODAL,
   SHOW_MODAL,
+  SET_RULES,
 } from 'constants/actionTypes';
+import api from 'services/api';
+import { parseResponse } from 'helpers';
+
+const setRules = rules => {
+  return { type: SET_RULES, rules };
+};
 
 export const selectImage = imageUrl => {
   return {
@@ -48,4 +55,29 @@ export const hideModal = modalId => {
     type: HIDE_MODAL,
     modalId,
   };
+};
+
+export const createRule = rule => async dispatch => {
+  try {
+    dispatch(startLoader());
+    return api.post('/rules', rule);
+  } catch (error) {
+    return console.error(error);
+  } finally {
+    dispatch(stopLoader());
+  }
+};
+
+export const getRules = () => async dispatch => {
+  try {
+    dispatch(startLoader());
+    const response = await api.get('/rules');
+    const { data } = response.data;
+    const rules = parseResponse(data);
+    return dispatch(setRules(rules));
+  } catch (error) {
+    return console.error(error);
+  } finally {
+    dispatch(stopLoader());
+  }
 };
