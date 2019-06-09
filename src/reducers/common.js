@@ -5,6 +5,7 @@ import {
   IS_COMPLETE,
   TOGGLE_MENU,
   SHOW_MODAL,
+  SET_RULES,
   HIDE_MODAL,
 } from 'constants/actionTypes';
 
@@ -14,14 +15,20 @@ const initialState = {
   showMenu: false,
   showModal: false,
   modalId: '',
+  rules: [],
 };
 
-const modal = (state = initialState, { type, imageUrl, modalId }) => {
+const modal = (state = initialState, { type, imageUrl, modalId, rules }) => {
   switch (type) {
     case SELECT_IMAGE:
       return {
         ...state,
         imageUrl,
+      };
+    case SET_RULES:
+      return {
+        ...state,
+        rules,
       };
     case REMOVE_IMAGE:
       return {

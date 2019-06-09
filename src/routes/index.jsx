@@ -9,7 +9,8 @@ import RulesOfPlay from 'components/Reaction';
 import GlobalStyles from 'styles/globals';
 import AuthRoutes from 'routes/Auth';
 
-import Navbar from 'components/Header';
+import Navbar from 'components/TopNav';
+import BottomNav from 'components/Nav';
 import EditUserProfile from 'pages/EditProfile';
 
 const routes = (
@@ -24,6 +25,7 @@ const routes = (
       <Route exact path="/edit-profile" component={EditUserProfile} />
       <Route component={AuthRoutes} />
     </Switch>
+    <BottomNav />
   </>
 );
 

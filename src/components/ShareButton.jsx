@@ -9,19 +9,16 @@ import { hideModal } from 'actions/common';
 
 export class ShareButton extends PureComponent {
   getPath = pathname => {
-    if (
-      pathname === '/' ||
-      !pathname.includes('/meme') ||
-      !pathname.includes('/wall')
-    )
-      return '';
-    return pathname;
+    if (pathname.includes('/meme') || pathname.includes('/wall'))
+      return pathname;
+    return '';
   };
 
   onClick = () => {
     const { origin, pathname } = window.location;
     const { network, actions } = this.props;
     const path = this.getPath(pathname);
+
     const url = `${origin}${path}`;
     const shareUrl = getShareLink(url, network);
     window.open(shareUrl);
@@ -47,15 +44,11 @@ const Button = styled.div`
   margin: ${calculateRem(10)};
 `;
 
-const mapStateToProps = state => ({
-  location: state.router.location,
-});
-
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators({ hideModal }, dispatch),
 });
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(ShareButton);

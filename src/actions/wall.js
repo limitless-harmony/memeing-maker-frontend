@@ -38,6 +38,7 @@ export const getAWall = id => async dispatch => {
     const { data } = response.data;
     const wall = parseResponse(data);
     wall.memes = parseResponse(wall.memes);
+    wall.creator = parseResponse(wall.creator);
     return dispatch(setAWall(wall));
   } catch (error) {
     return console.error(error);
