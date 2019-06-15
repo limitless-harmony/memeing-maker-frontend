@@ -9,7 +9,7 @@ import SingleMeme from 'pages/Single';
 import Wall from 'pages/Wall';
 import EditMeme from 'pages/EditMeme';
 import UserProfile from 'pages/Profile';
-import AdminPage from 'pages/Admin';
+import AdminRoutes from 'routes/Admin';
 
 export class Auth extends Component {
   componentDidMount() {
@@ -35,7 +35,7 @@ export class Auth extends Component {
         <Route exact path="/memes/:id/edit" component={EditMeme} />
         <Route exact path="/walls/:id" component={Wall} />
         <Route exact path="/users/:id" component={UserProfile} />
-        <Route exact path="/admin" component={AdminPage} />
+        <Route component={AdminRoutes} />
       </Switch>
     );
   }

@@ -62,7 +62,7 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   position: fixed;
-  z-index: 5;
+  z-index: 3;
   width: 100%;
   height: 100%;
   background: rgba(255, 255, 255, 0.8);
@@ -78,7 +78,7 @@ const StyledMenu = styled.div`
   flex-direction: column;
   align-items: center;
   background: ${white};
-  z-index: 6;
+  z-index: 4;
   height: 75%;
   max-height: ${calculateRem(640)};
   width: 100%;

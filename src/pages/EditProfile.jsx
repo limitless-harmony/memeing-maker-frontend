@@ -21,7 +21,7 @@ export class EditProfile extends Component {
     showOnboarding: false,
   };
 
-  async componentDidMount() {
+  componentDidMount() {
     this.setState({ size: this.widthRef.offsetWidth });
     const { authenticated, history, actions } = this.props;
     if (!authenticated) {
@@ -61,7 +61,6 @@ export class EditProfile extends Component {
   };
 
   toggleOnboarding = () => {
-    console.log('called');
     this.setState(({ showOnboarding }) => {
       return { showOnboarding: !showOnboarding };
     });

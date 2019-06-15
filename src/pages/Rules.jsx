@@ -10,11 +10,15 @@ import Wall from 'components/Wall';
 import { calculateRem } from 'styles';
 
 export class Rules extends Component {
-  async componentDidMount() {
+  componentDidMount() {
+    this.loadData();
+  }
+
+  loadData = async () => {
     const { actions } = this.props;
     await actions.getRules();
     await actions.getWalls();
-  }
+  };
 
   render() {
     const { rules, walls, history } = this.props;

@@ -9,10 +9,14 @@ import { calculateRem } from 'styles';
 import { dark } from 'styles/colors';
 
 class SelectWall extends Component {
-  async componentDidMount() {
+  componentDidMount() {
+    this.getWalls();
+  }
+
+  getWalls = async () => {
     const { actions } = this.props;
     await actions.getWalls();
-  }
+  };
 
   addMemeToWall = async wallId => {
     const { actions, meme } = this.props;

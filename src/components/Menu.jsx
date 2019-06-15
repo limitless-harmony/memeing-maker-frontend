@@ -45,9 +45,14 @@ export class Menu extends Component {
       <Container>
         <StyledMenu>
           {user && user.isAdmin && (
-            <MenuItem>
-              <StyledLink to="/admin">Admin Page</StyledLink>
-            </MenuItem>
+            <>
+              <MenuItem>
+                <StyledLink to="/admin">Admin Page</StyledLink>
+              </MenuItem>
+              <MenuItem>
+                <StyledLink to="/admin/rules">Add a Rule of play</StyledLink>
+              </MenuItem>
+            </>
           )}
           {meme && this.isPage('/memes/') && (
             <>

@@ -17,7 +17,7 @@ import Reaction from 'components/Reaction';
 import Button from 'components/Button';
 
 export class Single extends Component {
-  async componentDidMount() {
+  componentDidMount() {
     const { match } = this.props;
     const {
       params: { id },

@@ -10,6 +10,7 @@ import {
 } from 'constants/actionTypes';
 import api from 'services/api';
 import { parseResponse } from 'helpers';
+import { history } from 'store';
 
 const setRules = rules => {
   return { type: SET_RULES, rules };
@@ -60,7 +61,8 @@ export const hideModal = modalId => {
 export const createRule = rule => async dispatch => {
   try {
     dispatch(startLoader());
-    return api.post('/rules', rule);
+    await api.post('/admin/rules', rule);
+    return history.push('/rules');
   } catch (error) {
     return console.error(error);
   } finally {
