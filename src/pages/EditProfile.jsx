@@ -9,6 +9,7 @@ import { edit, savePathFrom, clearPathFrom } from 'actions/auth';
 import Input from 'components/Input';
 import defaultImage from 'assets/images/serious-cat.jpg';
 import MemeForm from 'components/MemeForm';
+import Onboarding from 'components/ProfileOnboarding';
 
 export class EditProfile extends Component {
   state = {
@@ -17,6 +18,7 @@ export class EditProfile extends Component {
     image: '',
     username: '',
     size: '',
+    showOnboarding: false,
   };
 
   async componentDidMount() {
@@ -42,7 +44,7 @@ export class EditProfile extends Component {
       };
     });
     if (!user.isComplete) {
-      toast.info('Welcome on board. Start by creating your profile meme');
+      this.toggleOnboarding();
     }
     return this.loadImage();
   };
@@ -56,6 +58,13 @@ export class EditProfile extends Component {
     const { actions } = this.props;
     const { image } = this.state;
     actions.selectImage(image);
+  };
+
+  toggleOnboarding = () => {
+    console.log('called');
+    this.setState(({ showOnboarding }) => {
+      return { showOnboarding: !showOnboarding };
+    });
   };
 
   editProfile = async () => {
@@ -85,7 +94,7 @@ export class EditProfile extends Component {
   };
 
   render() {
-    const { topText, bottomText, username, size } = this.state;
+    const { topText, bottomText, username, size, showOnboarding } = this.state;
     const { selectedImage } = this.props;
     return (
       <>
@@ -112,6 +121,7 @@ export class EditProfile extends Component {
             onSubmit={this.editProfile}
             submitText="Player Profile"
           />
+          {showOnboarding && <Onboarding hide={this.toggleOnboarding} />}
         </Container>
       </>
     );

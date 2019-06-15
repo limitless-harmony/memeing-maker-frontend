@@ -6,6 +6,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import RootModal from 'components/Modal';
+import SelectWallContainer from 'components/SelectWall';
 import SelectImageModal from 'components/SelectImage';
 import ShareModal from 'components/Share';
 import OverlayMenu from 'components/Menu';
@@ -13,7 +14,14 @@ import Loading from 'components/Loading';
 import { calculateRem, mobileWidth } from 'styles';
 import routes from 'routes';
 
-export const App = ({ history, showMenu, loading, showModal, modalId }) => {
+export const App = ({
+  history,
+  showMenu,
+  loading,
+  showModal,
+  modalId,
+  walls,
+}) => {
   return (
     <ConnectedRouter history={history}>
       <MainContainer>
@@ -24,6 +32,7 @@ export const App = ({ history, showMenu, loading, showModal, modalId }) => {
           <RootModal>
             {modalId === 'select-image' && <SelectImageModal />}
             {modalId === 'share' && <ShareModal />}
+            {modalId === 'select-wall' && <SelectWallContainer walls={walls} />}
           </RootModal>
         )}
         <ToastContainer autoClose={5000} />
@@ -48,6 +57,7 @@ const mapStateToProps = state => ({
   showMenu: state.common.showMenu,
   modalId: state.common.modalId,
   loading: state.common.loading,
+  walls: state.wall.walls,
 });
 
 export default connect(mapStateToProps)(App);

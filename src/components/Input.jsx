@@ -52,7 +52,7 @@ const StyledInput = styled.input`
   height: ${calculateRem(36)};
   border: none;
   outline: none;
-  width: 70%;
+  width: 80%;
   border-radius: ${calculateRem(10)};
   &::placeholder {
     text-decoration: ${({ underline }) => (underline ? 'underline' : 'none')};

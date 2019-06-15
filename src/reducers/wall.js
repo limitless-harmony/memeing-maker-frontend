@@ -6,13 +6,12 @@ const initialState = {
   walls: [],
 };
 
-const meme = (state = initialState, { type, walls, current, meta }) => {
+const meme = (state = initialState, { type, walls, current }) => {
   switch (type) {
     case SET_WALLS:
       return {
         ...state,
-        walls: [...state.walls, ...walls],
-        meta,
+        walls,
       };
     case SET_A_WALL:
       return {

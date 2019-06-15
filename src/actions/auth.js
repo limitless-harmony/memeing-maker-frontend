@@ -7,7 +7,7 @@ import {
 } from 'constants/actionTypes';
 import { startLoader, stopLoader } from 'actions/common';
 import api from 'services/api';
-import { setAuthToken } from 'helpers/auth';
+import { setAuthToken, isAdmin } from 'helpers/auth';
 
 const setPathFrom = previous => ({
   type: SET_PATH_FROM,
@@ -40,6 +40,7 @@ export const login = (accessToken, provider) => async dispatch => {
     const { data } = response.data;
     const { token, ...user } = data;
     await setAuthToken(token);
+    user.isAdmin = isAdmin(user.role);
     return dispatch(setUser(user));
   } catch (error) {
     return console.error(error);

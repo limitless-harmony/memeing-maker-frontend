@@ -3,11 +3,10 @@ import api from 'services/api';
 import { startLoader, stopLoader } from 'actions/common';
 import { parseResponse } from 'helpers';
 
-const setWalls = (walls, meta) => {
+const setWalls = walls => {
   return {
     type: SET_WALLS,
     walls,
-    meta,
   };
 };
 
@@ -21,16 +20,14 @@ const setAWall = current => {
 export const create = wall => async dispatch => {
   try {
     dispatch(startLoader());
-    const response = await api.post('/walls', wall);
-    const { data } = response.data;
-    const newWall = parseResponse(data);
-    return dispatch(setWalls([newWall]));
+    return api.post('/walls', wall);
   } catch (error) {
     return console.error(error);
   } finally {
     dispatch(stopLoader());
   }
 };
+
 export const getAWall = id => async dispatch => {
   try {
     dispatch(startLoader());
@@ -46,14 +43,25 @@ export const getAWall = id => async dispatch => {
     dispatch(stopLoader());
   }
 };
-export const getWalls = page => async dispatch => {
+
+export const getWalls = () => async dispatch => {
   try {
     dispatch(startLoader());
-    const response = await api.get(`/walls?page=${page}`);
+    const response = await api.get('/walls');
     const { data } = response.data;
-    const { docs, ...rest } = data;
-    const walls = parseResponse(docs);
-    return dispatch(setWalls(walls, rest));
+    const walls = parseResponse(data);
+    return dispatch(setWalls(walls));
+  } catch (error) {
+    return console.error(error);
+  } finally {
+    dispatch(stopLoader());
+  }
+};
+
+export const addMeme = (wallId, memeId) => async dispatch => {
+  try {
+    dispatch(startLoader());
+    return api.put(`/walls/${wallId}/${memeId}`);
   } catch (error) {
     return console.error(error);
   } finally {

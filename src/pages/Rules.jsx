@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import styled from 'styled-components';
 
+import { getWalls } from 'actions/wall';
 import { getRules } from 'actions/common';
 import WallContainer from 'components/WallContainer';
 import Wall from 'components/Wall';
@@ -12,13 +13,15 @@ export class Rules extends Component {
   async componentDidMount() {
     const { actions } = this.props;
     await actions.getRules();
+    await actions.getWalls();
   }
 
   render() {
-    const { rules } = this.props;
+    const { rules, walls, history } = this.props;
+    const wall = { name: 'Memeing Maker Rule of Play', memes: rules };
     return (
       <>
-        <Wall wall={rule} />
+        <Wall wall={wall} />
         <MoreWalls>More Meme Walls</MoreWalls>
         <WallContainer walls={walls} history={history} />
       </>
@@ -33,11 +36,12 @@ const MoreWalls = styled.div`
 `;
 
 const mapStateToProps = state => ({
+  walls: state.wall.walls,
   rules: state.common.rules,
 });
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators({ getRules }, dispatch),
+  actions: bindActionCreators({ getRules, getWalls }, dispatch),
 });
 
 export default connect(

@@ -19,6 +19,7 @@ import { ReactComponent as ThanksReaction } from 'assets/icons/thanks-reaction.s
 import { ReactComponent as ThoughtsReaction } from 'assets/icons/thoughts-reaction.svg';
 import { ReactComponent as Twitter } from 'assets/icons/twitter.svg';
 import { ReactComponent as WhatsApp } from 'assets/icons/whatsapp.svg';
+import { ReactComponent as ArrowHead } from 'assets/icons/arrow.svg';
 
 export {
   Create,
@@ -28,6 +29,7 @@ export {
   Ellipsis,
   AddImage,
   AddMemo,
+  ArrowHead,
   FacebookColored,
   FeelsReaction,
   GoArrow,

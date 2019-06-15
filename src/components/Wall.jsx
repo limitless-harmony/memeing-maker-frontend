@@ -41,7 +41,7 @@ const WallTitle = styled.div`
   box-sizing: border-box;
   box-shadow: ${calculateRem(2)} ${calculateRem(4)} ${calculateRem(4)} 0 ${dark};
   text-align: center;
-  font-size: ${calculateRem(23)};
+  font-size: ${calculateRem(25)};
   line-height: ${calculateRem(27)};
   width: 80%;
 `;
