@@ -19,13 +19,13 @@ export class Edit extends Component {
     imageUrl: '',
   };
 
-  async componentDidMount() {
+  componentDidMount() {
     this.setState({ size: this.widthRef.offsetWidth });
     const { match } = this.props;
     const {
       params: { id },
     } = match;
-    await this.fetchData(id);
+    return this.fetchData(id);
   }
 
   componentDidUpdate(prevProps) {

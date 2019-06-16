@@ -4,7 +4,7 @@ import { Switch, Route } from 'react-router-dom';
 import Home from 'pages/Home';
 import LoginPage from 'pages/Login';
 import AuthPage from 'pages/Authentication';
-import RulesOfPlay from 'components/Reaction';
+import RulesOfPlay from 'pages/Rules';
 
 import GlobalStyles from 'styles/globals';
 import AuthRoutes from 'routes/Auth';

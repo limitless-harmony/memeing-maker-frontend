@@ -111,8 +111,40 @@ export const reactToMeme = (memeId, reactions) => async dispatch => {
 export const flagMeme = memeId => async dispatch => {
   try {
     dispatch(startLoader());
-    await api.put(`/memes/${memeId}/flag`);
-    return history.push(`/memes/${memeId}`);
+    return api.put(`/memes/${memeId}/flag`);
+  } catch (error) {
+    return console.error(error);
+  } finally {
+    dispatch(stopLoader());
+  }
+};
+
+export const feature = memeId => async dispatch => {
+  try {
+    dispatch(startLoader());
+    return api.put(`admin/memes/${memeId}/feature`);
+  } catch (error) {
+    return console.error(error);
+  } finally {
+    dispatch(stopLoader());
+  }
+};
+
+export const unFeature = memeId => async dispatch => {
+  try {
+    dispatch(startLoader());
+    return api.put(`admin/memes/${memeId}/un-feature`);
+  } catch (error) {
+    return console.error(error);
+  } finally {
+    dispatch(stopLoader());
+  }
+};
+
+export const deleteMeme = memeId => async dispatch => {
+  try {
+    dispatch(startLoader());
+    return api.delete(`admin/memes/${memeId}/delete`);
   } catch (error) {
     return console.error(error);
   } finally {

@@ -9,7 +9,7 @@ import Wall from 'components/Wall';
 import { calculateRem } from 'styles';
 
 export class MemeWall extends Component {
-  async componentDidMount() {
+  componentDidMount() {
     const { match } = this.props;
     const {
       params: { id },

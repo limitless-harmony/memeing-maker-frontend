@@ -20,6 +20,10 @@ class MemeContainer extends Component {
     this.observer.observe(this.loadingRef);
   }
 
+  componentWillUnmount() {
+    this.observer.disconnect();
+  }
+
   handleObserver = entities => {
     const { prevY } = this.state;
     const { fetchMore, hasNextPage } = this.props;

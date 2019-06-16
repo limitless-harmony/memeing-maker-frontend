@@ -10,10 +10,14 @@ import Button from 'components/Button';
 import { buttonBorder, black } from 'styles/colors';
 
 export class Featured extends Component {
-  async componentDidMount() {
+  componentDidMount() {
+    this.getFeatured();
+  }
+
+  getFeatured = async () => {
     const { actions } = this.props;
     await actions.getFeatured();
-  }
+  };
 
   login = () => {
     const { history } = this.props;

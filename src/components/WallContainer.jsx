@@ -20,6 +20,10 @@ class WallContainer extends Component {
     this.observer.observe(this.loadingRef);
   }
 
+  componentWillUnmount() {
+    this.observer.disconnect();
+  }
+
   loadWall = wallId => {
     const { history } = this.props;
     return history.push(`/walls/${wallId}`);

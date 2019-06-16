@@ -44,6 +44,16 @@ export class Menu extends Component {
     return (
       <Container>
         <StyledMenu>
+          {user && user.isAdmin && (
+            <>
+              <MenuItem>
+                <StyledLink to="/admin">Admin Page</StyledLink>
+              </MenuItem>
+              <MenuItem>
+                <StyledLink to="/admin/rules">Add a Rule of play</StyledLink>
+              </MenuItem>
+            </>
+          )}
           {meme && this.isPage('/memes/') && (
             <>
               <MenuItem>
@@ -112,7 +122,7 @@ const StyledMenu = styled.div`
   border: ${calculateRem(2)} solid ${dark};
   box-sizing: border-box;
   border-radius: ${calculateRem(15)};
-  margin: ${calculateRem(60)} ${calculateRem(30)};
+  margin: ${calculateRem(60)} ${calculateRem(40)};
   padding: ${calculateRem(60)} ${calculateRem(20)};
   font-size: ${calculateRem(22)};
   line-height: ${calculateRem(28)};

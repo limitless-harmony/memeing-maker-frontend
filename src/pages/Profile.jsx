@@ -11,7 +11,7 @@ import MemeContainer from 'components/MemeContainer';
 import WallContainer from 'components/WallContainer';
 
 export class Profile extends Component {
-  async componentDidMount() {
+  componentDidMount() {
     const { match } = this.props;
     const {
       params: { id },
